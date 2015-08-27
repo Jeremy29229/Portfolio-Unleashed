@@ -1,0 +1,37 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMLeaveFeedback
+
+@{
+    ViewBag.Title = "Message to User";
+}
+
+
+
+@section PageHeader
+{
+    Send a Message
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div class="cardFeedbackHeader">
+            <p>Please enter your message to @Model.Receiver.</p>
+        </div>
+    
+        <div class="form-group">
+            @Html.TextAreaFor(x => x.Description, new { @class="form-control" })
+        </div>
+        <div>@Html.HiddenFor(x => x.IsSeen)</div>
+        <div>@Html.HiddenFor(x => x.Sender)</div>
+        <div>@Html.HiddenFor(x => x.TimeStamp)</div>
+        <div>@Html.HiddenFor(x => x.Title)</div>
+        <div>@Html.HiddenFor(x => x.URL)</div>
+        <div>@Html.HiddenFor(x => x.UserId)</div>
+        <div>@Html.HiddenFor(x => x.SenderId)</div>
+        <div class="submitButton">
+            <input class="btn btn-primary" type="submit" value="Send" />
+        </div>
+    }
+</div>

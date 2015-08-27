@@ -1,0 +1,112 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Style/MainLayoutStyle.css" type="text/css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="mainLayout">
+
+        <div id ="headerDiv">
+
+            <div id="headerInfo">
+
+                <div id="websiteTitle">
+                    <a href="~/Home/Index">
+                        <img id="websiteLogo" src="~/Images/LogoPortfolio.png" />
+                    </a>
+                    <h4>Let Yourself be Known</h4>
+                </div>
+
+                <div id="membershipArea">
+                    @Html.Partial("~/Views/Shared/_LoginStatusPartial.cshtml", new VMLoginUser())
+                </div>
+
+            </div>
+
+            <div id="navBarArea">
+                <div id="navBar">
+                    <span class="navBarOptions"><a href="@Url.Action("Index","Home")">Home</a></span>
+                    <span class="navBarOptions"><a href="@Url.Action("Support","Home")">Support</a></span>
+                    <span class="navBarOptions"><a href="@Url.Action("FAQ","Home")">FAQ</a></span>
+                    <span class="navBarOptions"><a href="#">Member's Area</a></span>
+                    <span class="navBarOptions" id="searchBar">
+                        <input id="searchButton" type="button" value="Search" />
+                        <input id="textInput" type="text"/>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clearFix" />
+
+        <div id="headerBannerdiv">
+            @RenderSection("PageHeader", false)
+        </div>
+
+        <div id="viewBodySection">
+            @RenderBody()
+        </div>
+
+        <div id ="footerDiv">
+            <div id="footerTransition">
+                <h4 id="transTitle">Portfolio Unleashed</h4>
+            </div>
+            <div id="siteDescription">
+                <h2 class="footerHeaders">Let the World Know What YOU Can Do</h2>
+                <p>
+                    Founded in May, 2014, Portfolio Unleashed was designed from scratch to be 
+                    the go-to site for professional portfolio creation and presentation. Here,
+                    users can show off their skills and talent to the world, giving them an 
+                    edge in the job market. With our easy setup design and UI, users can 
+                    easily create their own unique sets of portfolios with various projects.
+                </p>
+                <p>
+                    We know everyone has a unique skill they want to be known for. That is why
+                    our mission is to provided users with a way to create professional 
+                    portfolio that lets them highlight their unique qualities. Are you an artist?
+                    Our site will let you display your work fornt and center. Do you specialize in
+                    game design? You can easily add a link to where viewers can play or download 
+                    your original game.
+                </p>
+                <p>
+                    Everyone has a unique set of skills. These skills are what make you stand 
+                    out when looking for a career in your field. But how can you show off these 
+                    skills if you don't have a medium in which to do so? This website is 
+                    designed to let users easily create a presentable portfolio that they can 
+                    later use to present themselves to various potential employers.
+                </p>
+            </div>
+
+            <div id="siteInfoLinks">
+                <h2 class="footerHeaders">Site Info</h2>
+                <ul>
+                    <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                    <li><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                    <li><a href="@Url.Action("Support","Home")">Support</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">User Aggrement</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div id="footerMembershipLinks">
+                <h2 class="footerHeaders">Other</h2>
+                <ul>
+                    <li><a href="@Url.Action("AccountCreation","User")">Register</a></li>
+                    <li><a href="@Url.Action("Login","User")">Log in</a></li>
+                    <li><a href="@Url.Action("FAQ","Home")">FAQs</a></li>
+                    <li><a href="#">How-To</a></li>
+                </ul>
+            </div>
+
+            <div class="clearFix" />
+        </div>
+
+    </div>
+</body>
+</html>

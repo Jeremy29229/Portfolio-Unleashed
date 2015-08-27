@@ -1,0 +1,69 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@model PortfolioUnleashed.Models.ViewModels.VMFullProject
+
+@{
+    ViewBag.Title = Model.Title + " Collaborators";
+	bool userIsProjectMaster = Model.ProjectMasterIds.Any(ma => ma == WebSecurity.CurrentUserId);
+}
+
+@section PageHeader
+{
+	@Model.Title - Collaborator Management
+}
+
+<div class="container">
+	@if(Model.Collaborators!= null && Model.Collaborators.Where(c=> c.UserId != WebSecurity.CurrentUserId).Count()>0)
+	{
+		<h2>Current Collaborators</h2>
+		if (Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && !Model.ProjectEditorIds.Any(e => e == c.UserId)).Count() > 0)
+		{
+			foreach (VMContribution c in Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && !Model.ProjectEditorIds.Any(e => e == c.UserId)))
+			{
+				@Html.Partial("~/Views/Project/Partial/Display/_ManagingCollaborator.cshtml", new VMManagingCollaborator(c, false, false,userIsProjectMaster))
+			}
+		}
+		else
+		{
+			<p>None</p>
+		}
+		<h2>Current Project Editors</h2>
+		if (Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && Model.ProjectEditorIds.Any(e => e == c.UserId) && !Model.ProjectMasterIds.Any(ma=> ma == c.UserId)).Count() > 0)
+		{
+			foreach (VMContribution c in Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && Model.ProjectEditorIds.Any(e => e == c.UserId) && !Model.ProjectMasterIds.Any(ma => ma == c.UserId)))
+			{
+				@Html.Partial("~/Views/Project/Partial/Display/_ManagingCollaborator.cshtml", new VMManagingCollaborator(c, true, false,userIsProjectMaster))
+			}
+		}
+		else
+		{
+			<p>None</p>
+		}
+		<h2>Current Project Masters</h2>
+		if (Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && Model.ProjectMasterIds.Any(e => e == c.UserId)).Count() > 0)
+		{
+			foreach (VMContribution c in Model.Collaborators.Where(c => c.UserId != WebSecurity.CurrentUserId && Model.ProjectMasterIds.Any(e => e == c.UserId)))
+			{
+				@Html.Partial("~/Views/Project/Partial/Display/_ManagingCollaborator.cshtml", new VMManagingCollaborator(c, true, true,userIsProjectMaster))
+			}
+		}
+		else
+		{
+			<p>None</p>
+		}
+	}
+	else
+	{
+		<h2>No Current Collaborators for this project</h2>
+	}
+	<hr />
+	<h2>Add New Collaborator By Email</h2>
+	@using (Html.BeginForm("AddCollaborator", "Project", routeValues: new { projectId = Model.Id }))
+	{
+		if (!string.IsNullOrEmpty(ViewBag.AddCollabError))
+		{
+			<p class="text-danger bg-warning">@ViewBag.AddCollabError</p>
+		}
+		@Html.TextBox("NewCollaboratorEmail",value:null, htmlAttributes:new { @class="form-control", placeholder="Collaborating User's Email" })
+		<input class="btn btn-primary" type="submit" value="Add" />
+	}
+</div>

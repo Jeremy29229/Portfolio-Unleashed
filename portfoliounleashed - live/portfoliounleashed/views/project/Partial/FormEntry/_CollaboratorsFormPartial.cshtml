@@ -1,0 +1,40 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMEditingCollaborators
+
+<fieldset class="projectCreatingSection">
+	<legend>Collaborators   <span class="glyphicon glyphicon-user"/></legend>
+	@if (Model.QuickContacts != null && Model.QuickContacts.Count > 0)
+	 {
+		<p>Add from Quick Contacts</p>
+		<ul>
+		 @foreach (VMQuickContact c in Model.QuickContacts)
+		 {
+			 bool isCollab = false;
+			 if (Model.Collaborators != null && Model.Collaborators.Count > 0)
+			 {
+				 if (Model.Collaborators.Where(cl => cl.UserId == c.UserId).FirstOrDefault() != null)
+				 {
+					 isCollab = true;
+				 }
+			 }
+			 <li>@Html.CheckBox(c.UserId+"AddBox",isCollab) @c.FirstName @c.LastName </li>
+		 }
+		</ul>
+	 }
+	<p>Add Users as Project Collaborators by Email</p>
+	<div id="collaboratorContainer">
+		@if(Model.Collaborators!=null && Model.Collaborators.Count>0)
+		{
+			foreach (VMContribution c in Model.Collaborators)
+			{
+				@Html.Partial("~/Views/Project/Partial/FormEntry/_NewCollaboratorEntry.cshtml", c);
+			}
+		}
+		else
+		{
+			@Html.Partial("~/Views/Project/Partial/FormEntry/_NewCollaboratorEntry.cshtml", new VMContribution());
+		}
+	</div>
+	<input class="btn btn-primary" type="button" id="btnAddCollaborator" value="Add Additional Collaborator" />
+</fieldset>

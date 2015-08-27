@@ -1,0 +1,114 @@
+﻿@using PortfolioUnleashed.Enums
+@using PortfolioUnleashed.Models.ViewModels
+@model VMCreatingUser
+
+@{
+	ViewBag.Title = "Account Creation";
+}
+
+<link href="~/Style/UserViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Create an Account
+}
+<div class="container">
+	@Html.ValidationSummary()
+	@using (Html.BeginForm("AccountCreation", "User", FormMethod.Post))
+ {
+        <fieldset class="container accountCreationSection">
+            <legend>Basic Info  <span class="glyphicon glyphicon-user" /></legend>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(m => m.FirstName)
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmationEmail)
+                @Html.TextBoxFor(m => m.ConfirmationEmail, new { @class = "form-control", placeholder = "Confirm Email" })
+                @Html.ValidationMessageFor(m => m.ConfirmationEmail)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmationPassword)
+                @Html.PasswordFor(m => m.ConfirmationPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmationPassword)
+            </div>
+        </fieldset>
+     if (Model.Education != null && Model.Education.Count > 0)
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_EducationFormPartial.cshtml", Model.Education)
+     }
+     else
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_EducationFormPartial.cshtml", new List<VMEducation>())
+     }
+     if (Model.Links != null)
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_LinksFormPartial.cshtml", Model.Links)
+     }
+     else
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_LinksFormPartial.cshtml", new List<VMLink>())	
+     }
+     if (Model.ContactInfos != null && Model.ContactInfos.Count > 0)
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_ContactsFormPartial.cshtml", Model.ContactInfos)
+     }
+     else
+     {
+			@Html.Partial("~/Views/User/Partial/FormEntry/_ContactsFormPartial.cshtml", new List<VMContactInfo>())	  
+     }
+        <div class="submitButton">
+            <input class="btn btn-primary accountCreationSection" type="submit" value="Submit" />
+        </div>
+ }
+</div>
+
+<script src="~/Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+	//link entry creation
+	$(function () {
+		$("#btnAddLink").click(function (e) {
+			e.preventDefault();
+			$.get("@Url.Action("NewLinkEntry", "User")", function (data) {
+        	$("#linkContainer").append(data);
+        });
+	});
+});
+//contactInfo entry creation
+$(function () {
+	$("#btnAddContactInfo").click(function (e) {
+		e.preventDefault();
+		$.get("@Url.Action("NewContactInfoEntry", "User")", function (data) {
+			$("#contactInfoContainer").append(data);
+		});
+	});
+});
+//education entry creation
+$(function () {
+	$("#btnAddEducation").click(function (e) {
+		e.preventDefault();
+		$.get("@Url.Action("NewEducationEntry", "User")", function (data) {
+			$("#educationContainer").append(data);
+		});
+	});
+});
+
+</script>

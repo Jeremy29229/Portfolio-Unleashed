@@ -1,0 +1,33 @@
+﻿@using PortfolioUnleashed.Models;
+@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMFullProject>
+
+@{
+    ViewBag.Title = "AllProjects";
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	All Portfolios
+}
+
+@if (Model != null && Model.Count > 0)
+{
+	<ul>
+	    @foreach (VMFullProject u in Model)
+	    {
+	        <li>
+	        	@Html.Partial("~/Views/Project/Partial/Display/_FullProjectPartial.cshtml", u)
+                <a class="btn btn-default btn-sm" href="@Url.Action("ProjectCreateEdit", "Project", routeValues: new { id = u.Id })"><span class="glyphicon glyphicon-pencil"></span> Edit Project</a>
+                <a class="btn btn-default btn-sm" href="~/Admin/DeleteProject/@u.Id" onclick="return confirm('This will delete the Project from the databse entirely.\nThis cannot be undone.\nAre you sure you wish to proceed?')">Delete Project</a><br />
+	        </li>
+	    }
+	</ul>
+}
+else
+{
+	<h2>There are currently no portfolios in the database, or no users were passed in.</h2>
+}

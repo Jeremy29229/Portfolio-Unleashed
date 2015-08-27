@@ -1,0 +1,42 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMFullProject
+
+<div class="projectDiv">
+	<h3>@Model.Title <small class="text-muted"><i>[Contribution Setting: @Model.ContributionSetting]</i></small> <small class="text-muted"><i>[Template: @Model.Template]</i></small></h3>
+    @if (Model.Media != null && Model.Media.Count > 0)
+     {
+    	 if (Model.Template == ProjectTemplate.Template_1)
+    	 {
+    			<p>@Model.Description</p>
+    			@Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media)
+    	 }
+    	 else if (Model.Template == ProjectTemplate.Template_2)
+    	 {
+    			@Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media.Where(m => m.MediaType == MediaType.Image).ToList())
+    			<p>@Model.Description</p>
+    			@Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media)
+    	 }
+    	 else if (Model.Template == ProjectTemplate.Template_3)
+    	 {
+    			@Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media)
+    			<p>Model.Description</p>
+    	 }
+     }
+     else
+     {
+    		<p>@Model.Description</p>	
+     }
+    @if (Model.Collaborators != null && Model.Collaborators.Count>0)
+     {
+    	<p>Contributions</p>
+    	 foreach (VMContribution c in Model.Collaborators)
+    	 {
+    		@Html.Partial("~/Views/Project/Partial/Display/_ContributionPartial.cshtml", c)
+    	 }
+     }
+    else
+    {
+    	<p>No Contributions</p>
+    }
+</div>

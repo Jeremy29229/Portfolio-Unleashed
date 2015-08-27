@@ -1,0 +1,226 @@
+﻿body 
+{
+    font-family: sans-serif;
+    background-color: #64718f;
+}
+
+a 
+{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover
+{
+    text-decoration: underline;
+    color: #0026ff;
+}
+
+header 
+{
+    position: relative;
+    min-height: 50px;
+    background-color: #5873a9;
+}
+
+#websiteInfo 
+{
+    position: relative;
+    padding: 5px;
+    overflow: hidden;
+}
+
+#websiteTitle 
+{
+    position:relative;
+    float: left;
+    text-align: center;
+}
+
+#websiteLogo 
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+}
+
+#membershipArea 
+{
+    position:relative;
+    float: right;
+}
+
+.innerMemArea 
+{
+    margin: 5px;
+    padding: 2px;
+    width: 250px;
+    border: 4px double black;
+    border-radius: 10px;
+}
+
+#navbar 
+{
+    border: none;
+    margin-bottom: 0px;
+    background-color: #E6DBAC;
+    border: 2px solid black;
+}
+
+#navBarContainer 
+{
+    position: relative;
+    margin: 0px;
+}
+
+.navBarOptions 
+{
+    background-color: #E6DBAC;
+    border-radius: 8px;
+    border-left: 6px solid black;
+}
+
+.navBarOptions:hover
+{
+    background-color: #DAD1A6;
+    border-radius: 8px;
+}
+
+#searchForm 
+{
+    background-color: #E6DBAC;
+    border-radius: 8px;
+    border-left: 6px solid black;
+}
+
+#headerBannerdiv 
+{
+    color: black;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    padding: 5px;
+    background: -webkit-linear-gradient(#737d92, #42506d);
+    background: -moz-linear-gradient(#737d92, #42506d);
+    background: linear-gradient(#737d92, #42506d);
+    margin: 0px;
+}
+
+#transTitle 
+{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 10px;
+    margin-top: 15px;
+    background: -webkit-linear-gradient(#e6dbac, #D5C990);
+    background: -moz-linear-gradient(#e6dbac, #D5C990);
+    background: linear-gradient(#e6dbac, #D5C990);
+}
+
+#footerContent 
+{
+    text-align: center;
+    background: -webkit-linear-gradient(#D5C990, #e6dbac);
+    background: -moz-linear-gradient(#D5C990, #e6dbac);
+    background: linear-gradient(#D5C990, #e6dbac);
+    padding: 3px 30px;
+}
+
+#siteDescription > p,
+#siteInfoLinks > ul > li,
+#footerMembershipLinks > ul > li
+{
+    text-align: left;
+}
+
+.even-list-item 
+{
+    background: -webkit-linear-gradient(#778299, #828DA3);
+    background: -moz-linear-gradient(#778299, #828DA3);
+    background: linear-gradient(#778299, #828DA3);
+}
+
+.odd-list-item 
+{
+    background: -webkit-linear-gradient(#828DA3, #64718f);
+    background: -moz-linear-gradient(#828DA3, #64718f);
+    background: linear-gradient(#828DA3, #64718f);
+}
+
+#siteInfoLinks > ul > li > a,
+#footerMembershipLinks > ul > li > a 
+{
+    color: black;
+}
+
+#siteInfoLinks,
+#footerMembershipLinks
+{
+    margin-top: 10px;
+}
+
+#copyrightLine 
+{
+    background-color: #e6dbac;
+    text-align: center;
+    padding: 5px;
+}
+
+#pageBody 
+{
+    color: black;
+}
+
+/**/
+.submitButton 
+{
+    text-align: center;
+    margin: 10px;
+}
+
+.cardFeedbackHeader
+{
+    font-size: 18px;
+    color: #dabda6;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#notificationsTable 
+{
+    margin-top: 30px;
+}
+
+.tableHeaders 
+{
+    background-color: #898989;
+}
+
+.evenRowTableDetails 
+{
+    background-color: #ededed;
+}
+
+.oddRowTableDetails 
+{
+    background-color: #c4c4c4;
+}
+
+.generalLayout 
+{
+    border: 2px solid black;
+    padding: 20px;
+    padding-top: 0px;
+    background-color: #778299;
+    margin-top: 30px;
+}
+
+.generalLayout > h3
+{
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}

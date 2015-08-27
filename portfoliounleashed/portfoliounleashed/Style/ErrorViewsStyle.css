@@ -1,0 +1,44 @@
+﻿/* Error/Http404 */
+.errorContainer 
+{
+    background-color: white;
+    padding: 30px;
+    margin-top: 15px;
+}
+
+.errorContainer > p
+{
+    color: #971414;
+}
+
+.errorContainer > p > b
+{
+    color: black;
+}
+
+.errorContainer > h3, 
+.errorContainer > h2
+{
+    color: black;
+    text-align: center;
+}
+
+.errorContainer > div > ul > li
+{
+    color: #971414;
+}
+
+#errorImage
+{
+	width:90%;
+	margin:0px auto;
+}
+/* Error/Http404 */
+
+
+
+/* Error/Http500 */
+/* Error/Http500 */
+
+/* Error/General */
+/* Error/General */

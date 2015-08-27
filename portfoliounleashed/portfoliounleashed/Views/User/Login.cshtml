@@ -1,0 +1,38 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMLoginUser
+
+@{
+	ViewBag.Title = "Login";
+}
+
+<link href="~/Style/LoginPageStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Log In
+}
+<div id="logInPage" class="container">
+    <h2>Log in with an existing account</h2>
+    @using (Html.BeginForm())
+    {
+        <h4><span class="glyphicon glyphicon-log-in"> </span><span> Log-In Form</span></h4> 
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            <span class="glyphicon glyphicon-envelope"></span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter email" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <a href="#">Forgot your password?</a>
+    }
+</div>
+<div class="container">
+    <h3>Or</h3>
+	<h2><a href="@Url.Action("AccountCreation", "User")">Register</a> to create an account.</h2>
+</div>

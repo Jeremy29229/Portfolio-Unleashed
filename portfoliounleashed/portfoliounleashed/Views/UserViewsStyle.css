@@ -1,0 +1,124 @@
+﻿.submitButton 
+{
+    text-align: center;
+}
+
+.accountCreationSection 
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+/* User/Account/id */
+#userInformationDiv 
+{
+    background-color: #828da3;
+    border-radius: 5px;
+}
+
+#userInformationDiv > h2
+{
+    margin-bottom: 0px;
+    padding-bottom: 1px;
+    color: #dabda6;
+}
+
+#mainAccountInfo 
+{
+    border-top: 2px solid lightGray;
+    padding-top: 20px;
+}
+
+.accountSection 
+{
+    padding: 10px 20px;
+    height: inherit;
+}
+
+.accountSection > h4
+{
+    position: relative;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+#editButton 
+{
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* User/Account/id */
+
+
+
+/* RegistrationSetTwo */
+#regCompleteMessage 
+{
+    text-align: center;
+    color: #d5af90;
+    text-decoration: underline;
+}
+
+#regComplete > p
+{
+    font-size: 18px;
+    margin: 20px
+}
+/* RegistrationSetTwo */
+
+
+
+/* PasswordRecovery */
+#PasswordRecoveryForm 
+{
+    margin: 20px;
+    padding: 10px;
+}
+
+.passwordGroup 
+{
+    margin: 2px 20px;
+}
+/* PasswordRecovery */
+
+
+
+/* PasswordChange */
+#PasswordReset 
+{
+    margin: 20px;
+    padding: 10px;
+}
+/* PasswordChange */
+
+
+
+
+/* ConfirmationSuccess */
+#confirmedHeader 
+{
+    text-align: center;
+    color: #d5af90;
+}
+
+.confirmedMessage 
+{
+    text-align: center;
+    font-size: 20px;
+    margin: 20px;
+    padding: 10px;
+}
+/* ConfirmationSuccess */
+
+
+
+
+/* ConfirmationFailure */
+#failedConfirmedHeader 
+{
+    text-align: center;
+    color: #a90000;
+}
+/* ConfirmationFailure */

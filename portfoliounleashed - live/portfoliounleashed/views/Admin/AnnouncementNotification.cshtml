@@ -1,0 +1,39 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMAnnouncementNotification
+
+@{
+    ViewBag.Title = "AnnouncementNotification";
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+    Global Announcement
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>
+                Please enter your global annoucement. Remember that this will go out to all users on the site as a notification. Be as polite and professional as possible.
+            </p>
+        </div>
+        
+        <div id="annoucementForm" class="form-group">
+            <h4>Sender Name Shown to Recipients</h4>
+            <div>@Html.TextBoxFor(x => x.Sender, new { @class = "form-control", @id="senderName" })</div>
+            <br />
+            <h4>Announcement Title</h4>
+            <div>@Html.TextBoxFor(x => x.Title, new { @class = "form-control", @id="title" })</div>
+            <br />
+            <h4>Announcement Text</h4>
+            <div>@Html.TextAreaFor(x => x.Description, new { @class = "form-control", @id="announcementArea" })</div>
+        </div>
+        <div class="submitButton">
+            <input class="btn btn-primary btn-md" type="submit" value="Send" />
+        </div>
+    }
+</div>

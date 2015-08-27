@@ -1,0 +1,36 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMProjectMedium
+
+@{
+	int id = Model.Id;
+	Layout = null;
+}
+
+
+	<div class="form-group">
+		@Html.Hidden("ProjectMedia.Id", id)
+		@Html.LabelFor(m => m.Link)
+		@Html.TextBoxFor(m => m.Link, new { Name = "ProjectMedia.Link", @class="form-control", placeholder="Direct Link to the Media", maxlength=200})
+		@Html.ValidationMessageFor(m => m.Link)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.MediaType)
+		@Html.DropDownListFor(m => m.MediaType, new SelectList(
+			new List<Object>{
+				new { value= MediaType.Image, text = MediaType.Image.ToString() },
+				new { value= MediaType.Video, text = MediaType.Video.ToString() },
+				new { value= MediaType.YouTubeVideo, text = "Youtube Video" },
+				new { value= MediaType.Sound, text = MediaType.Sound.ToString() },
+				new { value= MediaType.Download, text = "Download Link" },
+				},
+				"value",
+				"text",
+				MediaType.Image), new { Name = "ProjectMedia.MediaType", @class="form-control"})
+		@Html.ValidationMessageFor(m => m.MediaType)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Caption)
+		@Html.TextBoxFor(m => m.Caption, new { Name = "ProjectMedia.Caption", @class="form-control", placeholder="Brief Caption", maxlength=200 })
+		@Html.ValidationMessageFor(m => m.Caption)
+	</div>

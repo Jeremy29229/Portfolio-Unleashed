@@ -1,0 +1,220 @@
+﻿/* Home/Index Page CSS */
+.sectionHomeHeader 
+{
+    text-align: center;
+    font-weight: bold;
+    color: #d5af90;
+    font-size: 24px;
+}
+
+.textBlurbDiv 
+{
+    margin-top: 20px;
+}
+
+.introTextSection > div
+{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.introTextSection > div > h4
+{
+    text-decoration: underline;
+}
+
+.examplePortfoliosDiv
+{
+    text-align: center;
+}
+
+.exampleSection 
+{
+    margin-top: 25px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolioExampleImage 
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#testimonyArea
+{
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #d5c990;
+    text-align: center;
+}
+
+.quote 
+{
+    margin: 15px;
+}
+/* Home/Index Page CSS */
+
+
+
+/* Home/About Page CSS */
+#aboutUsHeader > h2
+{
+    
+}
+
+.mainAboutHeaderImage 
+{
+    width:700px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#missionPanel 
+{
+    background-color: #E6DBAC;
+    margin-top: 6px;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.sectionAboutHeader
+{
+    background-color: #E6DBAC;
+    text-align: center;
+    font-weight: bolder;
+    border-color: black;
+}
+
+.developerBlurbDiv
+{
+    background-color: #737d92;
+    padding: 0px;
+    margin-top: 5px;
+    border-left: 4px solid #64718f;
+}
+
+.developerDescription
+{
+    position: relative;
+    margin: 20px 5px;
+}
+
+.aboutHeaderImage 
+{
+    position: relative;
+    float: left;
+}
+
+.developerDescription > div
+{
+    position: relative;
+    float: left;
+}
+
+.developerBlurbDiv > .developerName
+{
+    background-color: #e8deb1;
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin: 0px;
+}
+/* Home/About Page CSS */
+
+
+
+/* Home/Contact Page CSS */
+.contactInfo 
+{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#contactsHeadquartersDiv 
+{
+    margin: 30px 10px;
+}
+
+#contactsContactMethods 
+{
+    margin: 30px 10px;
+}
+
+#emailLink 
+{
+    text-decoration: none;
+    color: #0026ff;
+}
+
+#emailLink:hover
+{
+    text-decoration: underline;
+    color: #0094ff;
+}
+/* Home/Contact Page CSS */
+
+
+
+
+/* Home/FAQ Page CSS */
+#mainFaqPage 
+{
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #828da3;
+    font-size: 20px
+}
+
+dl 
+{
+    border-bottom: 1px solid white;
+}
+
+dt 
+{
+    margin-top: 20px;
+}
+
+dd 
+{
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+/* Home/FAQ Page CSS */
+
+
+
+/* Home/Support Page CSS */
+#supportMainPage 
+{
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #828da3;
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+#supportMainPage > h2
+{
+    text-decoration: underline;
+}
+
+#supportMainPage > p
+{
+    font-size: xx-small;
+}
+
+/* Home/Support Page CSS */

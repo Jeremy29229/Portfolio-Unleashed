@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Support";
+}
+
+<link href="~/Style/HomeViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Support
+}
+
+<div id="supportMainPage" class="container">
+    <p>Check @Html.ActionLink("here", "FAQ", "Home") for Frequently asked Questions</p>
+    <p>If your problem hasn't yet been resolved, call our customer support number at</p>
+    <h4>(608)-474-1665</h4>
+    <p>or email our support team at</p>
+    <a id="emailLink" href="mailto:landrade@student.neumont.edu?Subject=PortfolioUnleahsed%20Support" target="_top">Email the Webmaster</a>
+    @Html.ActionLink("Click here for help on understanding certain words.", "Glossary", "Home")
+</div>

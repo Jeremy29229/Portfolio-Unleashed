@@ -1,0 +1,64 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMPortfolio
+
+@{
+	ViewBag.Title = "Portfolio";
+}
+
+<link href="~/Style/PortfolioViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	@Model.Title
+	@if(Model.UserId == WebSecurity.CurrentUserId)
+	{
+		<a class="btn btn-primary pull-right" href="#" onclick="return confirm('This will delete the portoflio, but any projects connected to it will remain in your project catalog.\nProceed?')">Delete</a>
+		<a class="btn btn-primary pull-right" href="@Url.Action("PortfolioCreateEdit", new { id = Model.Id })">Edit</a>
+	}
+}
+<div id="portfolioButtons" class="btn-group-vertical pull-right">
+@if (Request.IsAuthenticated)
+{
+	if(Model.UserId == WebSecurity.CurrentUserId)
+	{
+		//any other buttons for owning user we'd want besides the edit & delete in the header
+	}
+	else
+	{
+		<a class="btn btn-primary pull-right" href="@Url.Action("LeaveCard","Notification", new {senderId = WebSecurity.CurrentUserId, receiverId = Model.UserId })">Leave Your Card</a>		
+		<a class="btn btn-primary pull-right" href="@Url.Action("LeaveFeedback","Notification", new {senderId = WebSecurity.CurrentUserId, portfolioId = Model.Id })">Leave feedback</a>	
+        <a class="btn btn-primary pull-right" href="@Url.Action("Report", "Notification", new { portId = Model.Id, portfolioName = Model.Title })" onclick="return confirm('Please only flag portfolios that contain innapropriate or abusive content.
+			\nAlternatively, you can send the user advice or suggestions with the Leave Feedback button.\nProceed?')">Report <span class="glyphicon glyphicon-flag" title="Report"></span></a>		
+	}
+}
+</div>
+
+<div class="container">
+    <div id="portfolioDescriptionDiv">
+           @if(Model.URL == null)
+              {
+                  <img src="http://www.gurgaonsaath.com/images/default-product-image.jpg" alt="Image" height="400"/>
+              }
+              else
+              {
+                  <img src="@Model.URL" alt="Image" height="400"/>
+              }
+        <p>@Model.Description</p>
+    </div>
+
+	@if (Model.Projects != null && Model.Projects.Count > 0)
+	{
+		foreach (VMProject p in Model.Projects)
+		{
+			@Html.Partial("~/Views/Project/Partial/Display/_ProjectPartial.cshtml", p)
+			<hr>	
+		}
+	}
+</div>
+@{
+    if(Model.UserId != WebSecurity.CurrentUserId)
+    {
+        Html.Action("AddPortfolioView", "Notification", new { portfolioId = Model.Id });
+    }
+}

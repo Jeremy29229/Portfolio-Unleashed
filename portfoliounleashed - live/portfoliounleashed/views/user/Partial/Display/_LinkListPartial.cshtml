@@ -1,0 +1,10 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMLink>
+
+<ul>
+@foreach(VMLink l in Model)
+{
+	@Html.Partial("~/Views/User/Partial/Display/_LinkPartial.cshtml", l)
+}
+</ul>

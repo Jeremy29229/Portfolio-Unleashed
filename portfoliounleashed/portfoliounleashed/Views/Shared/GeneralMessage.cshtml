@@ -1,0 +1,48 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMGeneralMessage
+@{
+    ViewBag.Title = "View1";
+}
+
+@section PageHeader
+{
+	@if(!string.IsNullOrEmpty(Model.MessageTitle))
+	{
+		@:@Model.MessageTitle
+	}
+	else
+	{
+		@:Message:
+	}
+}
+
+<div class="container text-center">
+@if(!string.IsNullOrEmpty(Model.MessageHeader))
+{
+	<h2>@Model.MessageHeader</h2>
+}
+@if (Model.Messages != null && Model.Messages.Count() > 0)
+{
+	foreach (string s in Model.Messages)
+	{
+		<h4>@s</h4>
+	}
+}
+else
+{
+	<h4>No message</h4>
+}
+
+@if (!string.IsNullOrEmpty(Model.OptionalURL))
+{
+	if (!string.IsNullOrEmpty(Model.OptionalURLDisplayText))
+	{
+		<a href="@Model.OptionalURL">@Model.OptionalURLDisplayText</a>
+	}
+	else
+	{
+		<a href="@Model.OptionalURL">Relevant Link</a>		
+	}
+}
+</div>

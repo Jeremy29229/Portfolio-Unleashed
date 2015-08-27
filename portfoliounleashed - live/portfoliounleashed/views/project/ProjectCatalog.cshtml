@@ -1,0 +1,36 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMProject>
+
+@{
+	ViewBag.Title = "Project Catalog";
+}
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+    Project Catalog 
+	@if (Request.IsAuthenticated)
+    {
+        <div>
+            <a class="btn btn-primary" href="@Url.Action("ProjectCreateEdit")"><span class="glyphicon glyphicon-plus"></span>   Create new project</a><br />
+        </div>
+    }
+}
+
+<div class="container-fluid">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (VMProject p in Model)
+        {
+        @Html.Partial("~/Views/Project/Partial/Display/_ProjectPartial.cshtml", p)
+        }
+    }
+    else
+    {
+        <div id="emptyProjectPrompt">
+            <h4>You currently have no projects in your project catalog!</h4>
+        </div>
+    }
+</div>

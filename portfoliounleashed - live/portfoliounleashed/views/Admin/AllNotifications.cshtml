@@ -1,0 +1,57 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMNotifications
+
+@{
+    ViewBag.Title = "All Notifications";
+}
+
+@section PageHeader
+{
+Notifications
+}
+
+<div id="notificationsTable" class="container-fluid">
+    @if (Model != null && Model.Notifications != null && Model.Notifications.Count > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">All Notifications</div>
+            <table class="table">
+
+                <tr>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "Title", isDescending = !Model.IsDescending})">Title @if(Model.OrderBy=="Title" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="Title" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "Description", isDescending = !Model.IsDescending})">Description (Message) @if(Model.OrderBy=="Description" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="Description" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "TimeStamp", isDescending = !Model.IsDescending})">TimeStamp (UTC) @if(Model.OrderBy=="TimeStamp" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="TimeStamp" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "TimeStamp", isDescending = !Model.IsDescending})">TimeStamp (Local Time) @if(Model.OrderBy=="TimeStamp" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="TimeStamp" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "URL", isDescending = !Model.IsDescending})">URL @if(Model.OrderBy=="URL" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="URL" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "NotificationType", isDescending = !Model.IsDescending})">Notification Type @if(Model.OrderBy=="NotificationType" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="NotificationType" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "Seen", isDescending = !Model.IsDescending})">Seen By Owner @if(Model.OrderBy=="Seen" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="Seen" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "Email", isDescending = !Model.IsDescending})">Owner's Email @if(Model.OrderBy=="Email" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="Email" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "OwnerId", isDescending = !Model.IsDescending})">Owner's Id @if(Model.OrderBy=="OwnerId" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="OwnerId" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "Sender", isDescending = !Model.IsDescending})">Sender Displayed @if(Model.OrderBy=="Sender" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="Sender" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("AllNotifications", "Admin", new { orderBy = "SenderId", isDescending = !Model.IsDescending})">Sender's Id @if(Model.OrderBy=="SenderId" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="SenderId" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                </tr>
+
+                @foreach (PortfolioUnleashed.Models.ViewModels.VMNotification n in Model.Notifications)
+                {
+                    PortfolioUnleashed.Data_Layer.DatabaseDAL DAL = new PortfolioUnleashed.Data_Layer.DatabaseDAL();
+                    <tr>
+                        <td>@n.Title</td>
+                        <td>@n.Description</td>
+                        <td>@n.TimeStamp</td>
+                        <td>@n.TimeStamp.ToLocalTime()</td>
+                        <td>@n.URL</td>
+                        <td>@n.NotificationType</td>
+                        <td>@n.IsSeen</td>
+                        <td>@DAL.retrieveUser(n.UserId).Email</td>
+                        <td>@n.UserId</td>
+                        <td>@n.Sender</td>
+                        <td>@n.SenderId</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+    else
+    {
+        <h2>There are currently no notifications in the database.</h2>
+    }
+</div>

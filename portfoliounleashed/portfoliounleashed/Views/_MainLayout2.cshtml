@@ -1,0 +1,158 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Data_Layer;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Style/MainLayout2Style.css" type="text/css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    @{
+        Html.Action("DailyNotification", "Notification");
+    }
+    <header>
+        <div class="container-fluid" id="websiteInfo">
+            <div class="row" >
+                <div class="col-xs-12 col-sm-8 col-md-8" id="websiteTitle" >
+                    <a href="~/Home/Index">
+                        <img class="img img-responsive" id="websiteLogo" src="~/Images/LogoPortfolio.png" />
+                    </a>
+                    <h4>Let Yourself be Known</h4>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4" id="membershipArea">
+                    <div class="innerMemArea">
+                        @Html.Partial("~/Views/Shared/_LoginStatusPartial.cshtml", new VMLoginUser())
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav id="navbar" class="navbar navbar-inverse container-fluid" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="navBarOptions"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="navBarOptions"><a href="@Url.Action("Support", "Home")">Support</a></li>
+                    <li class="navBarOptions"><a href="@Url.Action("FAQ", "Home")">FAQ</a></li>
+
+                    @if (WebSecurity.IsAuthenticated && WebSecurity.CurrentUserId != -1)
+                    {
+                        DatabaseDAL DAL = new DatabaseDAL();
+                        <li class="navBarOptions">@Html.Partial("~/Views/Shared/_NotificationTabPartial.cshtml", new VMUser(DAL.retrieveUser(WebSecurity.CurrentUserId)))</li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="navBarOptions"><a href="@Url.Action("Index", "Admin")">Admin Controls</a></li>
+                    }
+                </ul>
+                        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new {id="searchForm", @class="navbar-form navbar-right", role="search" }))
+                        {
+                            <div class="form-group">
+                                @Html.TextBox("searchText", null, new { id="searchText", type="text", @class="form-control", placeholder="Search" })
+                                @Html.Label("Search For: ")
+                                @Html.DropDownList("searchType", new SelectList(
+                                    new List<Object>{
+    					                new { value= "user_FullName", text = "Users" },
+    					                new { value= "portfolio_Title", text = "Portfolios"},
+    				                },
+                                    "value",
+                                    "text",
+                                    "Users"))
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                }
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid" id="headerBannerdiv">
+        @RenderSection("PageHeader", false)
+    </div>
+
+    <div id="pageBody" class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div id="transTitle" class="container">
+            <p>Porfolio Unleashed</p>
+        </div>
+
+        <div id="footerContent" class="container">
+            <div class="row">
+                <div id="siteDescription" class="col-xs-6">
+                    <h2 class="footerHeaders">Let the World Know What YOU Can Do</h2>
+                    <p>
+                        Founded in May, 2014, Portfolio Unleashed was designed from scratch to be 
+                            the go-to site for professional portfolio creation and presentation. Here,
+                            users can show off their skills and talent to the world, giving them an 
+                            edge in the job market. With our easy setup design and UI, users can 
+                            easily create their own unique sets of portfolios with various projects.
+                    </p>
+                    <p>
+                        We know everyone has a unique skill they want to be known for. That is why
+                            our mission is to provided users with a way to create professional 
+                            portfolio that lets them highlight their unique qualities. Are you an artist?
+                            Our site will let you display your work fornt and center. Do you specialize in
+                            game design? You can easily add a link to where viewers can play or download 
+                            your original game.
+                    </p>
+                    <p>
+                        Everyone has a unique set of skills. These skills are what make you stand 
+                            out when looking for a career in your field. But how can you show off these 
+                            skills if you don't have a medium in which to do so? This website is 
+                            designed to let users easily create a presentable portfolio that they can 
+                            later use to present themselves to various potential employers.
+                    </p>
+                </div>
+
+                <div id="siteInfoLinks" class="col-xs-3">
+                    <h2 class="footerHeaders">Site Info</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item odd-list-item"><a href="@Url.Action("About", "Home")">About Us</a></li>
+                        <li class="list-group-item even-list-item"><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                        <li class="list-group-item odd-list-item"><a href="@Url.Action("Support", "Home")">Support</a></li>
+                        <li class="list-group-item even-list-item"><a href="@Url.Action("News", "Home")">News</a></li>
+                        <li class="list-group-item odd-list-item"><a href="@Url.Action("UserAgreement", "Home")">User Agreement</a></li>
+                        <li class="list-group-item even-list-item"><a href="@Url.Action("PrivacyPolicy", "Home")">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div id="footerMembershipLinks" class="col-xs-3">
+                    <h2 class="footerHeaders">Other</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item odd-list-item"><a href="@Url.Action("AccountCreation", "User")">Register</a></li>
+                        <li class="list-group-item even-list-item"><a href="@Url.Action("Login", "User")">Log in</a></li>
+                        <li class="list-group-item odd-list-item"><a href="@Url.Action("FAQ", "Home")">FAQs</a></li>
+                        <li class="list-group-item even-list-item"><a href="@Url.Action("HowTo", "Home")">How-To-Portfolio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="copyrightLine" class="container-fluid">
+            <h6>Copyright 2014, Neumont University  |  A Neumont University Student Project site</h6>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.intellisense.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-hover-dropdown.js"></script>
+</body>
+</html>

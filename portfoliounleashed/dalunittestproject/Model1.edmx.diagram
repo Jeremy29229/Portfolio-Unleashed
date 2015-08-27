@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="994d9d7669c64a429d6b0fafd5cdbef1" Name="Diagram1">
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContactInfo" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Contribution" Width="1.5" PointX="9.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContributionMedium" Width="1.5" PointX="12" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Education" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Link" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Notification" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Portfolio" Width="1.5" PointX="5.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Project" Width="1.5" PointX="7.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectMedium" Width="1.5" PointX="9.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectPermission" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.QuickReference" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.User" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserContactInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Contribution_ContributionMedium" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_Contribution" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_Contribution" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserEducation" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserLink" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserProject" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_Portfolio" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_ProjectMedium" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_ProjectPermission" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_ProjectPermission" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_QuickReference" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_Portfolio" ManuallyRouted="false" />
+        <AssociationConnector Association="PortfolioUnleashedModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,15 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMContribution
+
+@{
+	Layout = null;
+	int projectId = Model.ProjectId;
+}
+
+<div class="form-group">
+    @Html.Hidden("Contribution.ProjectId", projectId)
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email, new { Name = "Contribution.Email", @class="form-control", placeholder="Collaborating User's Email",maxlength=508 })
+    @Html.ValidationMessageFor(m => m.Email)
+</div>

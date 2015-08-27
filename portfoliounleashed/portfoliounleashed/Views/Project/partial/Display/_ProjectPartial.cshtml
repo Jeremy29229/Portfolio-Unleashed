@@ -1,0 +1,119 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMProject
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+<div class="projectDiv">
+    <div class="projectTitleHeaderDiv">
+		@if (User.IsInRole("Admin") || 
+				((Model.currentUserId == WebSecurity.CurrentUserId)&&
+				((Model.ProjectEditorIds != null && Model.ProjectEditorIds.Count > 0) && Model.ProjectEditorIds.Any(id => id == WebSecurity.CurrentUserId)))) //if admin or project editor
+				{
+				<div class="pull-right">
+					@if (User.IsInRole("Admin") && !Model.ProjectEditorIds.Any(id => id == WebSecurity.CurrentUserId))
+					{
+					<span class="glyphicon glyphicon-tower" title="Admin Project Editing Tools"></span>//can edit because admin
+					}
+					else if (Model.ProjectMasterIds.Any(id => id == WebSecurity.CurrentUserId))
+					{
+					<span class="glyphicon glyphicon-star" title="Project Master Tools"></span>//can edit because project editor
+					}
+					else
+					{
+					<span class="glyphicon glyphicon-wrench" title="Project Editor Tools"></span>//can edit because project editor
+					}
+					<div class="btn-group">
+						<a class="btn btn-default btn-xs" href="@Url.Action("ProjectCreateEdit", "Project", routeValues: new { id = Model.Id })"><span class="glyphicon glyphicon-pencil" title="Edit Project"></span></a>
+						@if(Model.ProjectMasterIds.Any(id => id == WebSecurity.CurrentUserId))
+						{
+							<a class="btn btn-default btn-xs" href="#"><span class="glyphicon glyphicon-trash" title="Delete Project"
+								onclick="return confirm('This will delete the project entirely, including any media and contributions connected to it.\nAre you sure you wish to proceed?')"></span></a>
+						}
+						<a class="btn btn-default btn-xs" href="@Url.Action("CollaboratorManagement", "Project", new { id = Model.Id })"><span class="glyphicon glyphicon-list" title="Manage Contributrions"></span></a>
+					</div>
+				</div>
+			}
+        <h3 class="projectTitle">
+            @Model.Title
+			@if(Model.currentUserId == WebSecurity.CurrentUserId)
+			{
+				<span class="btn-group">
+					<a class="btn btn-default btn-xs" href="@Url.Action("EditContribution", "Project", routeValues:new { projectId = Model.Id, userId = Model.currentUserId })"><span class="glyphicon glyphicon-edit" title="Edit Contribution"></span></a>
+					<a class="btn btn-default btn-xs" href="@Url.Action("RemoveFromProjectCatalog", "Project", routeValues:new { projectId = Model.Id, userId = Model.currentUserId })" 
+						onclick="return confirm('This will remove you as a collaborator to this project.\nIf you are the only collaborator, the project will be deleted.\nProceed?')" }><span class="glyphicon glyphicon-remove-circle" title="Remove From Project Catalog"></span></a>
+				</span>
+			}	
+	   </h3>
+			@if (Request.IsAuthenticated &&  Model.Collaborators != null && Model.Collaborators.Count > 0 && !Model.Collaborators.Any(c => c.UserId == WebSecurity.CurrentUserId) && Model.currentUserId != WebSecurity.CurrentUserId)//if not a collaborator & not their project
+		   {
+				<div class="pull-right clearfix">
+					@if (Model.ContributionSetting == ContributionSetting.Open)
+					{
+						<small><i>Did you work on this project?</i></small> <a class="btn btn-default btn-xs" href="@Url.Action("AddSelfAsCollaborator", "Project", routeValues:new { projectId = Model.Id, userId =WebSecurity.CurrentUserId })"><span class="glyphicon glyphicon-user" title="Project Editor Tools"></span> Add Yourself as a Collaborator</a>
+					}
+					else if (Model.ContributionSetting == ContributionSetting.RequestOnly)
+					{
+						<small><i>Did you work on this project?</i></small> <a class="btn btn-default btn-xs" href="@Url.Action("RequestAddAsCollaborator", "Project", routeValues: new { projectId = Model.Id, userId = WebSecurity.CurrentUserId })"><span class="glyphicon glyphicon-user" title="Project Editor Tools"></span> Request to be added as a Collaborator</a>
+					}
+				</div>
+		   }
+		<br />
+    </div>
+
+    <div class="projectInfo well-sm">
+        @if (Model.Media != null && Model.Media.Count > 0)
+        {
+            if (Model.Template == ProjectTemplate.Template_1)
+            {
+                <div class="row">
+                    <div class="projectDescriptionDiv col-xs-12">
+                        <h4>Description</h4>
+                        <p class="projectDescription">@Model.Description</p>
+                    </div>
+                    <div class="mediaOnlySection col-xs-12">
+                        <div class="projectSectionHeader">
+                            <h4>Media</h4>
+                        </div>
+                        @Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media)
+                    </div>
+                </div>
+            }
+            else if (Model.Template == ProjectTemplate.Template_2)
+            {
+                <div class="projectSectionHeader">
+                    <h4>Images</h4>
+                </div>
+                @Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media.Where(m => m.MediaType == MediaType.Image).ToList())
+                <div class="projectDescriptionDiv">
+                    <h4>Description</h4>
+                    <p class="projectDescription">@Model.Description</p>
+                </div>
+                <div class="projectSectionHeader">
+                    <h4>Media</h4>
+                </div>
+                @Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media.Where(m => m.MediaType != MediaType.Image).ToList())
+            }
+            else if (Model.Template == ProjectTemplate.Template_3)
+            {
+                <div class="projectSectionHeader">
+                    <h4>Media</h4>
+                </div>
+                @Html.Partial("~/Views/Project/Partial/Display/_ProjectMediaListPartial.cshtml", Model.Media)
+                <div class="projectDescriptionDiv">
+                    <h4>Description</h4>
+                    <p class="projectDescription">@Model.Description</p>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>Description</h4>
+            <p class="projectDescription">@Model.Description</p>	
+        }
+        @if (Model.PersonalContribution != null && !string.IsNullOrEmpty(Model.PersonalContribution.Title))
+        {
+            @Html.Partial("~/Views/Project/Partial/Display/_ContributionPartial.cshtml", Model.PersonalContribution)
+        }
+    </div>
+</div>

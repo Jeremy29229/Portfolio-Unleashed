@@ -1,0 +1,70 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMEditingPortfolio
+
+@{
+	ViewBag.Title = "Portfolio Editor";
+}
+
+<link href="~/Style/PortfolioViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Portfolio Editor
+}
+
+<div class="container">
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("PortfolioCreateEdit", "Portfolio", FormMethod.Post))
+    {
+    	<div>
+    		<div class="form-group">
+    			@Html.HiddenFor(m => m.Id)
+				@Html.HiddenFor(m=> m.UserId)
+    			@Html.LabelFor(m => m.Title)
+    			@Html.TextBoxFor(m => m.Title, new { @class="form-control" })
+    			@Html.ValidationMessageFor(m => m.Title)
+    		</div>
+    		<div class="form-group">
+    			@Html.LabelFor(m => m.Description)
+    			@Html.TextBoxFor(m => m.Description, new { @class="form-control" })
+    			@Html.ValidationMessageFor(m => m.Description)
+    		</div>
+    		<div class="form-group">
+    			@Html.LabelFor(m => m.Visibility)
+    			@Html.DropDownListFor(m => m.Visibility, new SelectList(
+    				new List<Object>{
+    					new { value= VisibilityType.Public, text = VisibilityType.Public.ToString() },
+    					new { value= VisibilityType.LinkOnly, text = "Link Only" },
+    				},
+    				"value",
+    				"text",
+    				VisibilityType.Public), new { @class="form-control" })
+    			@Html.ValidationMessageFor(m => m.Visibility)
+    		</div>
+    		<div class="form-group">
+    			@Html.LabelFor(m => m.IsMainPortfolio)
+    			@Html.CheckBoxFor(m => m.IsMainPortfolio)
+    			@Html.ValidationMessageFor(m => m.IsMainPortfolio)
+    		</div>
+    	</div>
+    	<fieldset>
+    		<legend>Projects</legend>
+    		@if (Model.ProjectCatalog != null && Model.ProjectCatalog.Count > 0)
+    		{
+    			<ul>
+    				@foreach (VMProject p in Model.ProjectCatalog)
+    				{
+    					<li>@p.Title @Html.CheckBox(p.Id+"AddBox",(Model.Projects.Contains(p))) <br />
+                            @p.Description.Substring(0, (p.Description.Length>80)?80:p.Description.Length) ... </li>					
+    				}
+    			</ul>
+    		}
+    		else
+    		{
+    			<p>You currently have no projects in your Project Catalog</p>
+    		}
+    	</fieldset>
+    	<input class="btn btn-primary" type="submit" value="Submit"/>
+    }
+</div>

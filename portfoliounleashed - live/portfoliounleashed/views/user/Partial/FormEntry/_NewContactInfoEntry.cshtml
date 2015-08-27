@@ -1,0 +1,23 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMContactInfo
+@{ 
+    Layout = null;
+    int id = Model.Id;	
+}
+
+<div class="formSection">
+    <div class="form-group">
+        @Html.HiddenFor(m => m.UserId, new { Name = "ContactInfo.UserId" })
+        @Html.Hidden("ContactInfo.Id", id)
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { Name = "ContactInfo.Title", @class = "form-control", placeholder = "e.g. 'Personal Phone', 'Home Phone', 'Work Email', etc" })
+        @Html.ValidationMessageFor(m => m.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Information)
+        @Html.TextBoxFor(m => m.Information, new { Name = "ContactInfo.Information", @class = "form-control", placeholder = "e.g. '(555)-555-5555', 'example@example.com', etc" })
+        @Html.ValidationMessageFor(m => m.Information)
+    </div>
+</div>

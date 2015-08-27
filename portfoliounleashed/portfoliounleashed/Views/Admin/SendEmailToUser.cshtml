@@ -1,0 +1,36 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMSendEmailToUser
+
+@{
+    ViewBag.Title = "EmailToUser ";
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+    Email To User
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>
+                Fill out to send an email to Specifed user.
+            </p>
+        </div>
+        
+        <div id="annoucementForm" class="form-group">
+            <h4>User Email</h4>
+            <div>@Html.TextBoxFor(x => x.to, new { @class = "form-control", @id="senderName" })</div>
+            <br />
+            <h4>Email Body</h4>
+            <div>@Html.TextAreaFor(x => x.message, new { @class = "form-control", @id="announcementArea" })</div>
+        </div>
+        <div class="submitButton">
+            <input class="btn btn-primary btn-md" type="submit" value="Send" />
+        </div>
+    }
+</div>

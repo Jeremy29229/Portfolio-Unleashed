@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="691de64eec1b4c55a4f54d112dcacf16" Name="Diagram1" ZoomLevel="89">
+<<<<<<< .mine
+        
+        
+        
+        
+        
+=======
+        
+        
+        
+        
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Medium" Width="1.5" PointX="9.375" PointY="26.375" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContactInfo" Width="1.5" PointX="7.7479986193347719" PointY="12.475858053414084" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Contribution" Width="1.5" PointX="3.4386483130225205" PointY="12.681127330605465" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContributionMedium" Width="1.5" PointX="10.674174483248113" PointY="16.214576192300104" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Education" Width="1.5" PointX="8.8451879680367131" PointY="11.339375426685146" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.FeaturedPortfolio" Width="1.5" PointX="10.880606324821994" PointY="5.0643391185739723" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Link" Width="1.5" PointX="8.6290772355297012" PointY="19.365046107845867" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Notification" Width="1.5" PointX="11.560506557841091" PointY="9.58709282129402" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Portfolio" Width="1.5" PointX="9.3082271429282741" PointY="13.943698323305556" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Project" Width="1.5" PointX="8.74824384262238" PointY="2.9483652426620783" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectMedium" Width="1.5" PointX="9.25" PointY="6.75" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectPermission" Width="1.5" PointX="9.9241937892158489" PointY="11.35859132341975" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.QuickReference" Width="1.5" PointX="2.4904146820727804" PointY="25.045165416339955" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.User" Width="1.5" PointX="5.2890073793423396" PointY="19.380159327471702" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.UserSetting" Width="1.5" PointX="5.2073207931627152" PointY="29.336623578023456" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserContactInfo" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Contribution_ContributionMedium" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_Contribution" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_Contribution" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserEducation" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Portfolio_FeaturedPortfolio" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserLink" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserProject" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_Portfolio" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_ProjectMedium" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_ProjectPermission" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_ProjectPermission" />
+        <AssociationConnector Association="PortfolioUnleashedModel.User_QuickReference" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserSetting_User" />
+        <AssociationConnector Association="PortfolioUnleashedModel.Project_Portfolio" />
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; .r68
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

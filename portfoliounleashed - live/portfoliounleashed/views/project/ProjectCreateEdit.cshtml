@@ -1,0 +1,123 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMEditingProject
+@{
+	ViewBag.Title = "Project Editor";
+}
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Project Editor
+}
+<div class="container">
+@Html.ValidationSummary()
+@using (Html.BeginForm("ProjectCreateEdit", "Project", FormMethod.Post))
+{
+	@Html.HiddenFor(m => m.Id)
+	<fieldset class="projectCreatingSection">
+			<legend>Basic Info <span class="glyphicon glyphicon-edit"/></legend>
+			<div>
+				<div class="form-group">
+					@Html.LabelFor(m => m.Title)
+					@Html.TextBoxFor(m => m.Title, new { @class="form-control", placeholder="Title", maxlength=100 })
+					@Html.ValidationMessageFor(m => m.Title)
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(m => m.Description)
+					@Html.TextAreaFor(m => m.Description, new { @class="form-control", placeholder="Description", maxlength=4000 })
+					@Html.ValidationMessageFor(m => m.Description)
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(m => m.Template)
+					@Html.DropDownListFor(m => m.Template, new SelectList(
+						new List<Object>{
+							new { value= ProjectTemplate.Template_1, text = "Title > Description > Media"},
+							new { value= ProjectTemplate.Template_2, text = "Title > Images > Description > Media"},
+							new { value= ProjectTemplate.Template_3, text = "Title > Media > Description"},
+							},
+							"value",
+							"text",
+							ProjectTemplate.Template_1), new { @class="form-control"})
+					@Html.ValidationMessageFor(m => m.Template)
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(m => m.ContributionSetting)
+					@Html.DropDownListFor(m => m.ContributionSetting, new SelectList(
+						new List<Object>{
+							new { value= ContributionSetting.Open, text = "Open - Any user can add themselves as a collaborator"},
+							new { value= ContributionSetting.Closed, text = "Closed - Only Project Editors can add users as collaborators"},
+							new { value= ContributionSetting.RequestOnly, text = "Request Only - Users can request to be added as a collaborator, approved or denied by Project Editors"},
+							},
+							"value",
+							"text",
+							ContributionSetting.Open), new { @class="form-control"})
+					@Html.ValidationMessageFor(m => m.ContributionSetting)
+				</div>
+			</div>
+	</fieldset>
+	ViewBag.ContributionMedia = false;
+	if (Model.Media != null && Model.Media.Count > 0)
+	{
+		@Html.Partial("~/Views/Project/Partial/FormEntry/_ProjectMediaFormPartial.cshtml", Model.Media)		
+	}
+	else
+	{
+		@Html.Partial("~/Views/Project/Partial/FormEntry/_ProjectMediaFormPartial.cshtml", new List<VMProjectMedium>())			 
+	}
+
+	List<VMContribution> collaborators;
+	List<VMQuickContact> quickContacts;
+	collaborators = (Model.EditingCollaborators != null && (Model.EditingCollaborators.Collaborators != null && Model.EditingCollaborators.Collaborators.Count > 0)) ? Model.EditingCollaborators.Collaborators : new List<VMContribution>();
+	quickContacts = (Model.EditingCollaborators != null && (Model.EditingCollaborators.QuickContacts != null && Model.EditingCollaborators.QuickContacts.Count > 0)) ? Model.EditingCollaborators.QuickContacts : new List<VMQuickContact>();		
+	
+	@Html.Partial("~/Views/Project/Partial/FormEntry/_CollaboratorsFormPartial.cshtml", new VMEditingCollaborators { Collaborators = collaborators, QuickContacts = quickContacts })				
+	
+	if (Model.PersonalContribution != null)
+	{
+		@Html.Partial("~/Views/Project/Partial/FormEntry/_ContributionFormPartial.cshtml", Model.PersonalContribution)		
+	}
+	else
+	{
+		@Html.Partial("~/Views/Project/Partial/FormEntry/_ContributionFormPartial.cshtml", new VMContribution())			 
+    }
+	
+    <div id="submitButtonDiv">
+        <h4>Ready?</h4>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </div>
+}
+</div>
+
+<script src="~/Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+	//Project Media entry creation
+	$(function () {
+		$("#btnAddProjectMedia").click(function (e) {
+			e.preventDefault();
+			$.get("@Url.Action("NewProjectMediumEntry", "Project")", function (data) {
+				$("#projectMediaContainer").append(data);
+			});
+		});
+	});
+	//Contribution Media entry creation
+	$(function () {
+		$("#btnAddContributionMedia").click(function (e) {
+			e.preventDefault();
+			$.get("@Url.Action("NewContributionMediumEntry", "Project")", function (data) {
+				$("#contributionMediaContainer").append(data);
+			});
+		});
+	});
+	//Collaborator entry creation
+	$(function () {
+		$("#btnAddCollaborator").click(function (e) {
+			e.preventDefault();
+			$.get("@Url.Action("NewCollaboratorEntry", "Project")", function (data) {
+				$("#collaboratorContainer").append(data);
+			});
+		});
+	});
+
+</script>

@@ -1,0 +1,49 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@model VMLoginUser
+@{
+    VMLoginUser login = new VMLoginUser();
+}
+
+<link href="~/Style/LoginPageStyle.css" type="text/css" rel="stylesheet" />
+
+@if (Request.IsAuthenticated)
+{
+    <text>
+    <div id="welcomeUser">
+        Hello, @Html.ActionLink(User.Identity.Name, "Account", "User", routeValues: new { id = WebSecurity.CurrentUserId }, htmlAttributes: null)!
+    </div>
+    <ul class="list-group">
+        @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <li class="list-group-item even-list-item ">
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </li>
+        }
+
+        <li class="list-group-item odd-list-item">@Html.ActionLink("My Account", "Account", "User", routeValues: new { id = WebSecurity.CurrentUserId }, htmlAttributes: null)</li>
+        <li class="list-group-item even-list-item">@Html.ActionLink("My Project Catalog", "ProjectCatalog", "Project", routeValues: new { id = WebSecurity.CurrentUserId }, htmlAttributes: null)</li>
+    </ul>
+    </text>
+}
+else
+{
+    using (Html.BeginForm("Login", "User", Model))
+    {
+        <h4><span class="glyphicon glyphicon-log-in">   </span><span>  Log-In</span></h4> 
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            <span class="glyphicon glyphicon-envelope"></span>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter email" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <input class="btn btn-primary" type="submit" value="Log In" />
+        @Html.ActionLink("Lost Password?", "PasswordRecovery", "User") <div> or </div>
+        @Html.ActionLink("Register", "AccountCreation", "User")
+    }
+}

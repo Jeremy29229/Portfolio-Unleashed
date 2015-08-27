@@ -1,0 +1,100 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMUserSearch
+
+@{
+    ViewBag.Title = "User Search";
+}
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("searchText", null, new { id = "searchText", type = "text", placeholder = "Search Text" });
+    
+    @Html.Label("Search By: ");
+    
+    <select id="searchType" name="searchType">
+        <optgroup label="Users By">
+            @if (Model.SearchType == "user_FullName")
+            {
+                <option selected value="user_FullName">Full Name</option>
+                <option value="user_Email">Email</option>
+                <option value="user_FirstName">First Name</option>
+                <option value="user_LastName">Last Name</option>
+            }
+            else if (Model.SearchType == "user_Email")
+            {
+                <option value="user_FullName">Full Name</option>
+                <option selected value="user_Email">Email</option>
+                <option value="user_FirstName">First Name</option>
+                <option value="user_LastName">Last Name</option>
+            }
+            else if (Model.SearchType == "user_FirstName")
+            {
+                <option value="user_FullName">Full Name</option>
+                <option value="user_Email">Email</option>
+                <option selected value="user_FirstName">First Name</option>
+                <option value="user_LastName">Last Name</option>
+            }
+            else if (Model.SearchType == "user_LastName")
+            {
+                <option value="user_FullName">Full Name</option>
+                <option value="user_Email">Email</option>
+                <option value="user_FirstName">First Name</option>
+                <option selected value="user_LastName">Last Name</option>
+            }    
+        </optgroup>
+        <optgroup label="Portfolios By">
+            <option value="portfolio_Title">Title</option>
+            <option value="portfolio_OwnersEmail">Owner's Email</option>
+            <option value="portfolio_OwnersFullName">Owner's Full Name</option>
+            <option value="portfolio_OwnersFirstName">Owner's First Name</option>
+            <option value="portfolio_OwnersLastName">Owner's Last Name</option>
+        </optgroup>
+    </select>
+    
+    <input type="submit" value="Search" />
+}
+
+<br />
+
+@if (Model != null && Model.Results != null && Model.Results.Count > 0)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">User Search Results</div>
+        <table class="table">
+            @if (Model.Results.Count == 1)
+            {
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Profile</th>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th><a class="btn btn-primary" href="@Url.Action("Users", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "UserFirstName", isDescending = !Model.IsDescending})">First Name @if(Model.OrderBy=="UserFirstName" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="UserFirstName" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("Users", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "UserLastName", isDescending = !Model.IsDescending})">Last Name  @if(Model.OrderBy=="UserLastName" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="UserLastName" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn" href="#">Profile</a></th>
+                </tr>
+            }
+
+            @foreach (PortfolioUnleashed.Models.ViewModels.VMUserSearchResult r in Model.Results)
+            {
+                <tr>
+                    <td>@r.UserFirstName</td>
+                    <td>@r.UserLastName</td>
+                    <td><a class="btn btn-info" href="~/User/Account/@r.UserId">Profile Link</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else if (Model == null)
+{
+
+}
+else
+{
+    <h3>Your search didn't return any results :(</h3>
+}

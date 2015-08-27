@@ -1,0 +1,107 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMUser
+
+@{
+    ViewBag.Title = "Account";
+    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+}
+
+<link href="~/Style/UserViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+    @Model.FirstName @Model.LastName
+}
+
+<div id="userInformationDiv" class="container">
+    <div id="accountButtons" class="btn-group-vertical pull-right">
+        @if (Request.IsAuthenticated)
+        {
+            if (Model.UserId == WebSecurity.CurrentUserId)
+            {
+                //any other buttons for owning user we'd want besides the edit at the bottom
+            }
+            else
+            {
+                if (ViewBag.IsQuickReference)
+                {
+					<a class="btn btn-primary pull-right" href="@Url.Action("RemoveQuickContact", new { id = Model.UserId })">Remove from Quick Contacts</a>
+                }
+                else
+                {
+					<a class="btn btn-primary pull-right" href="@Url.Action("AddQuickContact", new { id = Model.UserId })">Add as a Quick Contact</a>
+                }
+					<a class="btn btn-primary pull-right" href="@Url.Action("LeaveCard", "Notification", new { senderId = WebSecurity.CurrentUserId, receiverId = Model.UserId })">Leave Your Card</a>		
+            }
+        }
+    </div>
+    <br />
+
+    <h2>Basic Information <span class="glyphicon glyphicon-user" /></h2>
+    <div id="mainAccountInfo">
+        <div class="well well-sm accountSection" id="userEducation">
+            <h4>Education  <span class="glyphicon glyphicon-book" /></h4>
+            @if (Model.Education != null && Model.Education.Count > 0)
+            {
+                @Html.Partial("~/Views/User/Partial/Display/_EducationListPartial.cshtml", Model.Education)
+            }
+        </div>
+
+        <div class="well well-sm accountSection" id="userContactInfo">
+            <h4>Contact Information     <span class="glyphicon glyphicon-earphone" />   <span class="glyphicon glyphicon-envelope" />   <span class="glyphicon glyphicon-print" />  <span class="glyphicon glyphicon-home" /></h4>
+            @if (Model.ContactInfos != null && Model.ContactInfos.Count > 0)
+            {
+                @Html.Partial("~/Views/User/Partial/Display/_ContactInfoListPartial.cshtml", Model.ContactInfos)
+            }
+        </div>
+
+        <div class="well well-sm accountSection" id="userLinks">
+            <h4>Outside Links  <span class="glyphicon glyphicon-file" /></h4>
+            @if (Model.Links != null && Model.Links.Count > 0)
+            {
+                @Html.Partial("~/Views/User/Partial/Display/_LinkListPartial.cshtml", Model.Links)
+            }
+        </div>
+
+        <div class="well well-sm accountSection" id="userPortfolios">
+            <h4>Portfolios <span class="glyphicon glyphicon-folder-open" /> </h4>
+			@if (Model.UserId == WebSecurity.CurrentUserId)
+            {
+				<a class="btn btn-default btn-xs" href="@Url.Action("PortfolioCreateEdit", "Portfolio", routeValues: null)"><span class="glyphicon glyphicon-plus"></span>New Portfolio</a>
+			}
+            @if (Model.Portfolios != null && Model.Portfolios.Count > 0)
+            {
+				if( Model.MainPortfolio != null)
+				{
+					@Html.Partial("~/Views/Portfolio/Partial/Display/_PortfolioPreview.cshtml", Model.MainPortfolio)
+					<p><b>See user's full portfolios: </b></p>
+				}
+                <ul>
+                    @foreach (VMPortfolio p in Model.Portfolios.Where(p => p.Visibility == VisibilityType.Public).ToList())
+                    {
+                        <li>@Html.ActionLink(p.Title, "Portfolio", "Portfolio", routeValues: new { Id = p.Id }, htmlAttributes: null)</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+        if (Model.UserId == WebSecurity.CurrentUserId)
+        {
+        <div id="editButton">
+            <h6>Need to edit something? </h6>
+            <a class="btn btn-primary" href="@Url.Action("AccountEdit", new { id = WebSecurity.CurrentUserId })">Edit Account</a>
+            <a class="btn btn-primary" href="@Url.Action("EditAccountSettings", new { id = WebSecurity.CurrentUserId })">Edit Account Settings</a>
+        </div>
+        
+        }
+    }
+</div>
+@{
+    if(Model.UserId != WebSecurity.CurrentUserId)
+    {
+        Html.Action("AddProfileView", "Notification", new { userId = Model.UserId });
+    }
+}

@@ -1,0 +1,22 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMContributionMedium>
+
+
+<fieldset class="container projectCreatingSection">
+	<legend>Media of Your Contribution <span class="glyphicon glyphicon-picture"/></legend>
+    <div id="contributionMediaContainer">
+		@if(Model!=null && Model.Count>0)
+		{
+			foreach (VMContributionMedium m in Model)
+			{
+				@Html.Partial("~/Views/Project/Partial/FormEntry/_NewContributionMediumEntry.cshtml", m);
+			}
+		}
+		else
+		{
+			@Html.Partial("~/Views/Project/Partial/FormEntry/_NewContributionMediumEntry.cshtml", new VMContributionMedium());	  
+		}
+	</div>
+	<input class="btn btn-primary" type="button" id="btnAddContributionMedia" value="Add Media" />	
+</fieldset>

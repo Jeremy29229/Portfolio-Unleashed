@@ -1,0 +1,56 @@
+﻿
+@model PortfolioUnleashed.Models.ViewModels.VMEditingRoles
+
+@{
+    ViewBag.Title = "ModifyRoles";
+    Layout = "~/Views/_MainLayout2.cshtml";
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+    Roles Management
+}
+
+<div id="RoleModifier" class="container">
+   
+        <div class="form-group">
+            <h2>Modify Roles</h2>
+            @using (Html.BeginForm("ModifyRoles", "Admin"))
+            {
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class="form-control", placeholder="User Name" })<br />
+                <button type="submit" class="btn btn-primary">Find User</button>
+            }
+        </div>
+        
+    <div id ="UserList">
+
+    @if (Model != null && Model.UserName != null)
+    {
+        
+       if (System.Web.Security.Roles.GetRolesForUser(Model.UserName).Contains("Admin"))
+       {
+            <h3>@Model.UserName | @Html.ActionLink("Demote to User", "DemoteToUser", "Admin", new { userName = Model.UserName }, null)</h3> 
+       }
+       else
+       {
+            <h3>@Model.UserName | @Html.ActionLink("Promote to Admin", "PromoteToAdmin", "Admin", new { userName = Model.UserName }, null)</h3> 
+       }
+    }
+    
+        @foreach (PortfolioUnleashed.User u in Model.allUsers.OrderBy(u => u.Email))
+        {
+            if (System.Web.Security.Roles.GetRolesForUser(u.Email).Contains("Admin"))
+            {
+                <h3>@u.Email | @Html.ActionLink("Demote to User", "DemoteToUser","Admin", new { userName = u.Email },null)</h3> 
+            }
+            else
+            {
+                <h3>@u.Email | @Html.ActionLink("Promote to Admin", "PromoteToAdmin","Admin",new { userName = u.Email },null)</h3> 
+            }
+          
+    }
+        </div>
+</div>

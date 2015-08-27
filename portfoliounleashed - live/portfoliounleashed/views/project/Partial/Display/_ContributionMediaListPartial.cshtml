@@ -1,0 +1,40 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMContributionMedium>
+
+<h4>Media</h4>
+
+<div id="imagesContribution" class="row">
+    @foreach (VMContributionMedium m in Model.Where(m => m.MediaType == MediaType.Image))
+    {
+        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediumPartial.cshtml", m)
+    }
+</div>
+
+<div id="videosContribution" class="row">
+    @foreach (VMContributionMedium m in Model.Where(m => m.MediaType == MediaType.Video))
+    {
+        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediumPartial.cshtml", m)
+    }
+</div>
+
+<div id="youttubeContribution" class="row">
+    @foreach (VMContributionMedium m in Model.Where(m => m.MediaType == MediaType.YouTubeVideo))
+    {
+        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediumPartial.cshtml", m)
+    }
+</div>
+
+<div id="soundContribution" class="row">
+    @foreach (VMContributionMedium m in Model.Where(m => m.MediaType == MediaType.Sound))
+    {
+        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediumPartial.cshtml", m)
+    }
+</div>
+
+<div id="downloadContribution" class="row">
+    @foreach (VMContributionMedium m in Model.Where(m => m.MediaType == MediaType.Download))
+    {
+        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediumPartial.cshtml", m)
+    }
+</div>

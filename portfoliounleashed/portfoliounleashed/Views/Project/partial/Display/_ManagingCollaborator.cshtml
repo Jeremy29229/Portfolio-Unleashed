@@ -1,0 +1,54 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMManagingCollaborator
+
+@{
+	string name;
+	if(User.IsInRole("Admin"))
+	{
+		name = (string.IsNullOrEmpty(Model.UserName)) ? "User " + Model.UserId : Model.UserName;
+	}
+	else
+	{
+		name = (string.IsNullOrEmpty(Model.UserName)) ? "User" : Model.UserName;		
+	}
+}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<div class="btn-group-vertical pull-right">
+				@if(Model.CollaboratorIsProjectEditor && !Model.CollaboratorIsProjectMaster && Model.UserIsProjectMaster)
+				{
+					<a class="btn btn-warning btn-xs text-left" href="@Url.Action("RemoveProjectEditor", new { userId = Model.UserId, projectId = Model.ProjectId})"><span class="glyphicon glyphicon-minus"></span> Remove as Project Editor</a>
+					<a class="btn btn-warning btn-xs text-left" href="@Url.Action("AddProjectMaster", new { userId = Model.UserId, projectId = Model.ProjectId})"><span class="glyphicon glyphicon-star"></span> Add as Project Master</a>
+					<a class="btn btn-danger btn-xs text-left" href="@Url.Action("RemoveCollaborator", new { userId = Model.UserId, projectId = Model.ProjectId})"><span class="glyphicon glyphicon-remove"></span> Remove as Collaborator</a>
+				}
+				else if(!Model.CollaboratorIsProjectEditor)
+				{
+					<a class="btn btn-primary btn-xs text-left" href="@Url.Action("AddProjectEditor", new { userId = Model.UserId, projectId = Model.ProjectId})"><span class="glyphicon glyphicon-plus"></span> Add as Project Editor</a>
+					<a class="btn btn-danger btn-xs text-left" href="@Url.Action("RemoveCollaborator", new { userId = Model.UserId, projectId = Model.ProjectId})"><span class="glyphicon glyphicon-remove"></span> Remove as Collaborator</a>
+				}
+			</div>
+			<h3>@name <small><i>@Html.ActionLink("View Account", "Account", "User", routeValues: new { id = Model.UserId }, htmlAttributes: new {target="_blank"})</i></small></h3>	
+		</div>
+	</div>
+	<div class="panel-body">
+		@if(string.IsNullOrEmpty(Model.Title) && string.IsNullOrEmpty(Model.DescriptionShort))
+		{
+			<p>No Contribution Title or Description</p>
+		}
+		else
+		{
+			<ul>
+				<li>
+					@Html.LabelFor(m=> m.Title)
+					@Html.DisplayFor(m=> m.Title)
+				</li>
+				<li>
+					@Html.LabelFor(m=> m.DescriptionShort)
+					@Html.DisplayFor(m=> m.DescriptionShort)
+				</li>
+			</ul>
+		}
+	</div>
+</div>

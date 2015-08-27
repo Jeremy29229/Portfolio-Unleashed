@@ -1,0 +1,10 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMEducation>
+
+<div class="row">
+@foreach (VMEducation e in Model)
+{
+	@Html.Partial("~/Views/User/Partial/Display/_EducationPartial.cshtml", e)
+}
+</div>

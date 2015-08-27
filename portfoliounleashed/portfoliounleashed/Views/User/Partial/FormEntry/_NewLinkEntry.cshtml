@@ -1,0 +1,23 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMLink
+@{ 
+    Layout = null;
+    int id = Model.Id;	
+}
+
+<div class="formSection">
+    <div class="form-group">
+        @Html.HiddenFor(m => m.UserId, new { Name = "Link.UserId" })
+        @Html.Hidden("Link.Id", id)
+        @Html.LabelFor(l => l.Title)
+        @Html.TextBoxFor(l => l.Title, new { Name = "Link.Title", @class = "form-control", placeholder = "e.g. 'My Blog', 'My LinkedIn', etc" })
+        @Html.ValidationMessageFor(m => m.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.Url)
+        @Html.TextBoxFor(l => l.Url, new { Name = "Link.Information", @class = "form-control", placeholder = "e.g. 'www.example.com'" })
+        @Html.ValidationMessageFor(l => l.Url)
+    </div>
+</div>

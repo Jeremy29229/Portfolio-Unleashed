@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="18c092cbdf2c4c1abf8f68354a0fefb7" Name="Diagram1" ZoomLevel="116">
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContactInfo" Width="1.5" PointX="4.375" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Contribution" Width="1.5" PointX="9.125" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ContributionMedium" Width="1.5" PointX="12" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Education" Width="1.5" PointX="5.625" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.FeaturedPortfolio" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Link" Width="1.5" PointX="9.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Notification" Width="1.5" PointX="3.875" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Portfolio" Width="1.5" PointX="5.375" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.Project" Width="1.5" PointX="9.375" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectMedium" Width="1.5" PointX="11.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.ProjectPermission" Width="1.5" PointX="7.375" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.QuickReference" Width="1.5" PointX="4.375" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.User" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortfolioUnleashedModel.UserSetting" Width="1.5" PointX="7.375" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserSettingUser" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserQuickReference" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserLink" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserContribution" />
+        <AssociationConnector Association="PortfolioUnleashedModel.ProjectContribution" />
+        <AssociationConnector Association="PortfolioUnleashedModel.ContributionContributionMedium" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserPortfolio" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserEducation" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserNotification" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserContactInfo" />
+        <AssociationConnector Association="PortfolioUnleashedModel.UserProjectPermission" />
+        <AssociationConnector Association="PortfolioUnleashedModel.ProjectProjectPermission" />
+        <AssociationConnector Association="PortfolioUnleashedModel.PortfolioFeaturedPortfolio" />
+        <AssociationConnector Association="PortfolioUnleashedModel.ProjectProjectMedium" />
+        <AssociationConnector Association="PortfolioUnleashedModel.ProjectPortfolio" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

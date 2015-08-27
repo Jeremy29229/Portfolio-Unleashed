@@ -1,0 +1,13 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMFullProject
+@{
+    ViewBag.Title = "Full Project";
+}
+
+@section PageHeader
+{
+	@Model.Title - Full Information
+}
+
+@Html.Partial("~/Views/Project/Partial/Display/_FullProjectPartial.cshtml", Model)

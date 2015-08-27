@@ -1,0 +1,31 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMUser
+
+@*<style>.dropdown-toggle:active, .open .dropdown-toggle {background:#DAD1A6 !important; color:#000 !important;}</style>*@
+ <link href="~/Style/NotificationTabPartialStyle.css" type="text/css" rel="stylesheet" />
+
+<a class="dropdown-toggle" data-hover="dropdown" href="~/Notification/All">
+    <span>Notifications</span>
+    <span class="badge">@Model.Notifications.Where(p => !p.IsSeen).Count()</span>
+    <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+    @{
+        int numItems = 0;
+        foreach (var n in Model.Notifications.OrderByDescending(t => t.TimeStamp))
+        {
+            if (!n.IsSeen)
+            {
+                numItems++;
+                <li><a href="~/Notification/All">@n.Title</a></li>
+            }
+        }
+        if(numItems > 0)
+        {
+           <li class="divider"></li> 
+        }
+    }
+    <li><a href="~/Notification/All">View All Notifications</a></li>
+</ul>
+<script type="text/javascript" src="~/Scripts/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-hover-dropdown.js"></script>

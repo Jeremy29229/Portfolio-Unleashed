@@ -1,0 +1,34 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMCollaborationRequest
+@{
+    ViewBag.Title = "Collaborator Request";
+}
+
+@section PageHeader
+{
+	Collaborator Request
+}
+<br/>
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h2 class="panel-title">A User has requested to be added as a Collaborator</h2></div>
+		<div class="panel-body">
+			<p><b>User:</b> @Model.UserName <small><i>@Html.ActionLink("(View Account)", "Account", "User", routeValues: new { id = Model.UserId }, htmlAttributes: new { target="blank"})</i></small></p>
+			<p><b>Project Title:</b> @Model.ProjectTitle <small><i>@Html.ActionLink("(View Full Project)", "FullProject", "Project", routeValues: new{id = Model.ProjectId}, htmlAttributes: new { target="blank"})</i></small></p>
+			<p><small><i class="text-muted">@Model.ProjectDescriptionBlurb</i></small></p>
+
+			<div class="center-block btn-group">
+				<a class="btn btn-success " href="@Url.Action("CollaboratorRequestConfirm", "Request", routeValues: new { userId = Model.UserId, projectId=Model.ProjectId })"><span class="glyphicon glyphicon-thumbs-up" title="Edit Project"></span> Confirm</a>
+				<a class="btn btn-danger " href="@Url.Action("CollaboratorRequestDeny", "Request", routeValues: new { userId = Model.UserId, projectId=Model.ProjectId })"><span class="glyphicon glyphicon-thumbs-down" title="Edit Project"></span> Deny</a>
+			</div>
+		</div>
+		<div class="panel-footer">
+			<ul class="list-unstyled">
+				<li><small><i class="text-info">Keep in mind that another Project Editor may respond to this request while you are on this page.</i></small></li>
+				<li><small><i class="text-info">If you are unsure of how to respond to this request, you can allow another Project Editor to handle the request by not pressing either button.</i></small></li>
+				<li><small><i class="text-info">If a user is continuously sending requests or otherwise abusing the project system, please send a report through the Support page.</i></small></li>
+			</ul>
+		</div>
+	</div>
+</div>

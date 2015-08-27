@@ -1,0 +1,119 @@
+﻿@using PortfolioUnleashed.Models;
+@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMUser>
+
+@{
+    ViewBag.Title = "AllUsers";
+    int index = 1;
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+All Users
+}
+
+<div class="container-fluid">
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="row">
+            @foreach (VMUser u in Model)
+            {
+                <div class="col-lg-6">
+                    <div class="userTitleInfo">
+                        <p><b>User:</b> <em>@u.FirstName @u.LastName</em> </p>
+                        <p class="text-muted">@Html.ActionLink("View Account", "Account", "User", routeValues: new{id=u.UserId}, htmlAttributes:new{target="blank"})</p>
+                    </div>
+                    <div class="userInfoDiv">
+                        <div class="listOfUserInfo">
+                            <ul class="userInfoList">
+                                <li class="non-decoratedListItem">
+                                    <p><b>Email:</b> @u.Email </p>
+                                    <p><b>Id:</b> @u.UserId </p>
+                                    @if (u.Education != null && u.Education.Count > 0)
+                                    {
+                                        <h4><b>List of Education</b></h4>
+                                        @Html.Partial("~/Views/User/Partial/Display/_EducationListPartial.cshtml", u.Education)
+                                    }
+                                    else
+                                    {
+                                        <h4><b>No Educations</b></h4>
+                                    }
+                                    @if (u.ContactInfos != null && u.ContactInfos.Count > 0)
+                                    {
+                                        <h4><b>List of Contacts</b></h4>                            
+                                        @Html.Partial("~/Views/User/Partial/Display/_ContactInfoListPartial.cshtml", u.ContactInfos)
+                                    }
+                                    else
+                                    {
+                                        <h4><b>No ContactInfos</b></h4>
+                                    }
+                                    @if (u.Links != null && u.Links.Count > 0)
+                                    {
+                                        <h4><b>List of Links/Downloads</b></h4>                            
+                                        @Html.Partial("~/Views/User/Partial/Display/_LinkListPartial.cshtml", u.Links)
+                                    }
+                                    else
+                                    {
+                                        <h4><b>No Links</b></h4>
+                                    }
+                                    @if (u.Portfolios != null && u.Portfolios.Count > 0)
+                                    {
+                                        <h4><b>Portfolios</b> - <small>Click on project title to access project details</small></h4>
+                                        <ul class="row">
+                                            @foreach (VMPortfolio p in u.Portfolios.ToList())
+                                            {
+                                                <li class="portfolioProjectItem col-xs-6 col-md-4">
+                                                    <p>@Html.ActionLink(p.Title, "Portfolio", controllerName: "Portfolio", routeValues: new { Id = p.Id }, htmlAttributes: null)</p>
+                                                    <p>Visibility : @p.Visibility</p>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <h4><b>No Portfolios</b></h4>
+                                    }
+                                    @if (u.ProjectCatalog != null && u.ProjectCatalog.Count > 0)
+                                    {
+                                        <h4><b>Projects</b></h4>
+                                        <h6><b>@Html.ActionLink("Project Catalog", "ProjectCatalog", "Project", routeValues: new { id = u.UserId }, htmlAttributes: null) (@u.ProjectCatalog.Count projects)</b></h6>
+                                        <ul class="row">
+                                            @foreach (VMProject p in u.ProjectCatalog)
+                                            {
+                                                <li class="portfolioProjectItem col-xs-6 col-md-4">@p.Title</li>
+                                            }
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <h4><b>No Projects</b></h4>
+                                    }
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="submitButton">
+                            <a class="btn btn-primary btn-sm" href="~/Notification/TargetedNotification/@u.UserId">Send Message</a><br />
+                            <a class="btn btn-primary btn-sm" href="~/Admin/AddDummyPortfolio/@u.UserId">Add Dummy Portfolio</a><br />
+                            <a class="btn btn-primary btn-sm" href="~/Account/@u.UserId/Edit">Edit User Info</a><br />
+                            <br />
+                            <a class="btn btn-primary btn-sm" href="~/Admin/DeleteUser/@u.UserId" onclick="return confirm('This will delete the User from the databse entirely.\nThis cannot be undone.\nAre you sure you wish to proceed?')">Delete User</a><br />
+                        </div>
+                    </div>
+                </div>
+                if (index % 2 == 0)
+                {
+                    <div class="clearfix visible-lg"></div>
+                }
+                index++;
+            }
+        </div>
+    }
+    else
+    {
+        <h2>There are currently no users in the database, or no users were passed in.</h2>
+    }
+</div>

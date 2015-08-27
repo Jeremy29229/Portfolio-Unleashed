@@ -1,0 +1,24 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMContactInfo>
+
+<fieldset class="container accountCreationSection">
+    <legend>Contacts   <span class="glyphicon glyphicon-earphone" /><span class="glyphicon glyphicon-envelope" /><span class="glyphicon glyphicon-print" /><span class="glyphicon glyphicon-home" /></legend>
+    <div id="contactInfoContainer">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (VMContactInfo c in Model)
+            {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewContactInfoEntry.cshtml", c);
+            }
+        }
+        else
+        {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewContactInfoEntry.cshtml", new VMContactInfo());
+        }
+    </div>
+
+    <div class="submitButton">
+        <input class="btn btn-primary" type="button" id="btnAddContactInfo" value="Add Contact Method" />
+    </div>
+</fieldset>

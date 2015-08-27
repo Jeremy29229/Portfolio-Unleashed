@@ -1,0 +1,10 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMContactInfo>
+
+<ul>
+@foreach (VMContactInfo c in Model)
+{
+	@Html.Partial("~/Views/User/Partial/Display/_ContactInfoPartial.cshtml", c)
+}
+</ul>

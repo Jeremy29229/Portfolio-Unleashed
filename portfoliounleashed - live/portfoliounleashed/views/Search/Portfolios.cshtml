@@ -1,0 +1,82 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMPortfolioSearch
+
+@{
+    ViewBag.Title = "Portfolio Search";
+}
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("searchText", null, new { id = "searchText", type = "text", placeholder = "Search Text" });
+    
+    @Html.Label("Search By: ");
+    
+    <select id="searchType" name="searchType">
+        <optgroup label="Portfolios By">
+            <option value="portfolio_Title">Title</option>
+            <option value="portfolio_OwnersEmail">Owner's Email</option>
+            <option value="portfolio_OwnersFullName">Owner's Full Name</option>
+            <option value="portfolio_OwnersFirstName">Owner's First Name</option>
+            <option value="portfolio_OwnersLastName">Owner's Last Name</option>
+        </optgroup>
+        <optgroup label="Users By">
+            <option value="user_FullName">Full Name</option>
+            <option value="user_Email">Email</option>
+            <option value="user_FirstName">First Name</option>
+            <option value="user_LastName">Last Name</option>
+        </optgroup>
+    </select>
+    
+    <input type="submit" value="Search" />
+}
+
+<br />
+
+@if (Model != null && Model.Results != null && Model.Results.Count > 0)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Portfolio Search Results</div>
+        <table class="table">
+            @if (Model.Results.Count == 1)
+            {
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Owner's First Name</th>
+                    <th>Owner's Last Name</th>
+                    <th>Portfolio</th>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th><a class="btn btn-primary" href="@Url.Action("Portfolios", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "PortfolioTitle", isDescending = !Model.IsDescending})">Title @if(Model.OrderBy=="PortfolioTitle" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="PortfolioTitle" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("Portfolios", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "PortfolioDescription", isDescending = !Model.IsDescending})">Description @if(Model.OrderBy=="PortfolioDescription" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="PortfolioDescription" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("Portfolios", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "PortfolioOwnersFirstName", isDescending = !Model.IsDescending})">Owner's First Name @if(Model.OrderBy=="PortfolioOwnersFirstName" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="PortfolioOwnersFirstName" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("Portfolios", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "PortfolioOwnersLastName", isDescending = !Model.IsDescending})">Owner's Last Name  @if(Model.OrderBy=="PortfolioOwnersLastName" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="PortfolioOwnersLastName" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn" href="#">Portfolio</a></th>
+                </tr>
+            }
+
+            @foreach (var p in Model.Results)
+            {
+                <tr>
+                    <td>@p.PortfolioTitle</td>
+                    <td>@p.PortfolioDescription</td>
+                    <td>@p.OwnersFirstName</td>
+                    <td>@p.OwnersLastName</td>
+                    <td><a class="btn btn-info" href="~/Portfolio/Portfolio/@p.PortfolioId">Portfolio Link</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else if (Model == null)
+{
+
+}
+else
+{
+    <h3>Your search didn't return any results :(</h3>
+}

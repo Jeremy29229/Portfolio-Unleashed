@@ -1,0 +1,27 @@
+﻿#logInPage > h2 
+{
+    text-align: center;
+    text-decoration: underline;
+}
+
+.username 
+{
+    font-weight: bold;
+}
+
+text > div 
+{
+
+}
+
+
+
+
+/* _LoginStatusPartial */
+#welcomeUser 
+{
+    margin: 5px auto;
+    text-align: center;
+    font-weight: bold;
+}
+/* _LoginStatusPartial */

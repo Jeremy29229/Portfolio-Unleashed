@@ -1,0 +1,57 @@
+﻿@using PortfolioUnleashed.Models.ViewModels
+@model VMErrorInformation
+@{
+	Layout = "~/Views/_MainLayoutBasic.cshtml";
+	ViewBag.Title = "Error";
+}
+
+<link href="~/Style/ErrorViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Error
+}
+
+<div class="errorContainer container">
+    <h2 class="error">Unfortunately, the request or current operation could not be completed.</h2>
+    @if (ViewBag.ErrorMessages != null && ViewBag.ErrorMessages.Length > 0)
+    {
+        <h3>Message: </h3>
+        foreach (string s in ViewBag.ErrorMessages)
+        {
+            <p>@s</p>		
+        }
+    }
+
+@*@if (Model != null && (HttpContext.Current.IsDebuggingEnabled || User.IsInRole("Admin")))*@
+    @if (Model != null && !string.IsNullOrEmpty(Model.ErrorCode))
+    {
+        <h3>Debug Information</h3>
+        if (!string.IsNullOrEmpty(Model.ErrorCode))
+        {
+            <p><b>Error Code:</b> @Model.ErrorCode</p>
+        }
+        if (!string.IsNullOrEmpty(Model.OuterException))
+        {
+            <p><b>Error:</b> @Model.OuterException</p>
+        }
+        if (!string.IsNullOrEmpty(Model.InnerException))
+        {
+            <p><b>Error Message:</b> @Model.InnerException</p>
+        }
+        if (!string.IsNullOrEmpty(Model.ErrorSource))
+        {
+            <p><b>Source:</b> @Model.ErrorSource</p>
+        }
+        if (!string.IsNullOrEmpty(Model.StackTrace))
+        {
+            <p><b>Stack Trace</b></p>
+            <div>
+                <ul>
+                    <li>@Html.Raw(Html.Encode(Model.StackTrace).Replace("%0d%0a", "</li><li>"))
+                </ul>
+            </div>
+        }
+    
+    }
+</div>

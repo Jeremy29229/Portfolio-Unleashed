@@ -1,0 +1,199 @@
+﻿@using PortfolioUnleashed.Models.ViewModels
+@model VMHomePage
+@{
+	ViewBag.Title = "Home";
+    Layout = "~/Views/_MainLayout2.cshtml";
+}
+
+<link href="~/Style/HomeViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Home
+}
+<div class="container-fluid textBlurbDiv">
+    <div class="sectionHomeHeader container">
+        <p>Welcome to Portfolio Unleashed</p>
+    </div>
+    <div class="row introText" >
+        <div class="col-xs-12 col-sm-4 introTextSection">
+            <div>
+                <h4>Why should you have a portfolio?</h4>
+            </div>
+            <p>
+                Looking for a job is not an easy task. Employers are always looking for the best talent and 
+                interviews just aren't enough anymore. Employers need to see what skills you can bring to their 
+                company and how you will perform while working with them. The best way to show off your talents 
+                is usually with a well-organized portfolio and shows-off you talents, endevours, hard-work, and 
+                overall skills in a certain field.
+            </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 introTextSection">
+            <div>
+                <h4>We are Portfolio Unleashed</h4>
+            </div>
+            <p>
+                Portfolio Unleashed is the an up-and-coming portfolio creation site designed to help facilitate 
+                the process of building and presenting your work and projects to potential employers everywhere. 
+                With a simple link at your disposal, anyone one you send that link to can see your work, 
+                talents, and skills.
+            </p>
+            <p>
+                We here know that creating a portfolio can be daunting, especially since you need to gain the 
+                viewer's attention from the start. If you miss that opportunity, you might have just lost that 
+                opportunity to work at your dream job and make something greater. We can't guarantee jobs, we 
+                can help you take that first step towards creating a porfolio that is professional, presentable, 
+                ans designed to show off what you can do and who you really are.
+            </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 introTextSection">
+            <div>
+                <h4>Why should you use Portfolio Unleashed?</h4>
+            </div>
+            <p>
+                Portfolio Unleashed is the only site that combines professional social networking with easy-to-use
+                profile and portfolio hosting. When you post your portfolio on Portfolio Unleashed, you open a door
+                for employers to come in and tell you who they are. We don't restrict you to one portfolio, and we 
+                allow you to share projects with others that have worked with you.
+            </p>
+            <p>
+                We have no ads, and will never charge you fees or coerce you into trying other products. We're just 
+                here to help you help yourself.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+
+
+<div class="container-fluid examplePortfoliosDiv">
+    <div class="sectionHomeHeader">
+        <p>Example Portfolios</p>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-4 exampleSection">
+            <img src="~/Images/exampleOne.jpg" class="img-responsive portfolioExampleImage" alt="Example Image 1" />
+            <h3>The Creative Side</h3>
+            <p>
+                For artists, their gallery of work speaks volumes about who they are and the work they can do. Words 
+                    can't describe what needs to be seen, which is why our porfolio allows users to display their work front 
+                    and center if they wish to do so.
+            </p>
+            <p>
+                This is necessary for various types of careers, where the work you do is focused more on the visual side. 
+                    You can't always express your talents in words because for many employers, having to shift through text 
+                    to finally find your work is time-consuming. This can lead to them ignoring your porfolio entirely.
+            </p>
+            <p>
+                Therefore, we have added a feature that allows users to make their work the highlight of their porfolio, 
+                    like this user.
+            </p>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-lg-4 exampleSection">
+            <img src="~/Images/exampleTwo.jpg" class="img-responsive portfolioExampleImage" alt="Example Image 2" />
+            <h3>An All-Round Person and Enthusiast</h3>
+            <p>
+                Our unique model of portfolios is perfect for people who have a variety of skills that they want to show to different people.
+                If you have artistic skills that you want to show to one employer, and programming skills that you want to show to another, 
+                you can have both of these seperate portfolios linked to your account.
+            </p>
+            <p>
+                If you want to show off all of your skills, you can easily link both portfolios to a single portfolio and refer people to that instead.
+                The possibilities are endless!
+            </p>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-6 col-lg-4 exampleSection">
+            <img src="~/Images/exampleThree.png" class="img-responsive portfolioExampleImage" alt="Example Image 3" />
+            <h3>Help For the Unskilled</h3>
+            <p>
+                You may be bad at making portfolios. That's okay; we won't judge. What we will do is supply you with several templates to ensure
+                that your portfolio won't turn out as bad as this one.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="container-fluid examplePortfoliosDiv">
+    <div class="sectionHomeHeader">
+        <p>Featured Portfolios</p>
+    </div>
+
+    <div class="row">
+        @if(Model.FeaturedPortfolios!=null&&Model.FeaturedPortfolios.Count>0)
+        {
+            foreach(VMPortfolio p in Model.FeaturedPortfolios)
+            {
+                <div class="col-xs-12 col-sm-6 col-lg-4 exampleSection">
+                    <h3>@Html.ActionLink(p.Title, "Portfolio", controllerName: "Portfolio", routeValues: new { Id = p.Id }, htmlAttributes: null)</h3>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 singleMedia">
+	                    <figure>
+                            @if(p.URL == null)
+                            {
+                                <img src="http://www.gurgaonsaath.com/images/default-product-image.jpg" alt="Image" height="300"/>
+                            }
+                            else
+                            {
+                                <img src="@p.URL" alt="Image" height="300"/>
+                            }
+                        </figure>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h3>There are no portfolios currently featured.</h3>
+        }
+    </div>
+</div>
+
+<hr />
+
+<div class="container" id="testimonialsDiv">
+    <div class="sectionHomeHeader">
+        <p>Testimonials</p>
+    </div>
+
+    <div id="testimonyArea">
+        <h5 class="quote" >"<span><em>Creating a portfolio was easy and I like the presentation of my work on my portfolio.</em></span>" - Morgan Fischer, AtTask</h5>
+        <h5 class="quote" >"<span><em>Being an artist, I like that I can put my work front and center, where anyone can see my talents from the get go.</em></span>" - Pablo Picasso, Painter</h5>
+        <h5 class="quote" >"<span><em>Being able to show videos of my work and letting people link to my final version of my game makes this site useful for people like me.</em></span>" - Shigeru Miyamoto, Nintendo</h5>
+        <h5 class="quote" >"<span><em>I was paid... I mean..., I think this site is awesome and worth checking out.</em></span>" - Anonymous, definetly not one of the developers</h5>
+        <h5 class="quote" >"<span><em>Wow, this sure is a website.</em></span>" - Greg</h5>
+    </div>
+</div>
+
+<hr />
+
+<div class="text-center">
+    <div class="sectionHomeHeader">
+        <h2>Interested in creating a portfolio, then join us today!</h2>
+    </div>
+	<a class="btn btn-primary btn-lg" href="@Url.Action("AccountCreation", "User")">Create an Account</a>
+</div>
+
+
+@*height="300" width="900"  class=portfolioExampleImage *@
+
+@*<div class="testimonialDiv">
+    <p class="tetimonialQuote">Lorem ipsum dolor sit amet, cum an nonumy dolores tractatos, quo eu summo denique nostrum. Ut quo dico noster fastidii. Id sit oblique volumus. Et vis summo causae torquatos.</p>
+    <p class="tetimonialGiver">- Man Manerson, now CEO of Company INC.</p>
+</div>
+<div class="testimonialDiv">
+    <p class="tetimonialQuote">
+        Ea audire legimus sea, id nulla tation persecuti vim. Id cum sapientem scripserit. Id per nibh ullamcorper, accusata scribentur ne sit. 
+			Per errem aliquam moderatius te, eos ei natum deserunt tractatos. Vis quando homero philosophia cu.
+    </p>
+    <p class="tetimonialGiver">- Dude Broseph Hunnington, student at MIT</p>
+</div>*@

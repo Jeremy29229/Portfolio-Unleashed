@@ -1,0 +1,52 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMContribution
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@{
+	string name;
+	if(User.IsInRole("Admin"))
+	{
+		name = ((string.IsNullOrEmpty(Model.Name))? "User " + Model.UserId : Model.Name);
+	}
+	else
+	{
+		name = ((string.IsNullOrEmpty(Model.Name))? "User" : Model.Name);		
+	}
+}
+<div class="contributionSection">
+    <div class="userContributionHeader">
+        <h4>@name's Contribution 
+	@if (ViewBag.ShowEditorIcon != null && ViewBag.ShowEditorIcon)
+    {
+        <span class="glyphicon glyphicon-wrench" title="Project Editor"></span>		
+    }
+        </h4>
+    </div>
+
+    <div class="contributionInfo">
+        @if (!string.IsNullOrEmpty(Model.Title) && !string.IsNullOrEmpty(Model.Description))
+        {
+            <ul>
+                <li>
+                    @Html.LabelFor(m => m.Title) : @Model.Title
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Description) : @Model.Description
+                </li>
+            </ul>
+
+                if (Model.Media != null && Model.Media.Count > 0)
+                {
+                    <div class="contributionMediaSection">
+                        @Html.Partial("~/Views/Project/Partial/Display/_ContributionMediaListPartial.cshtml", Model.Media)
+                    </div>
+                }
+        }
+        else
+        {
+            <p>No Contribution information added</p>
+        }
+    </div>
+</div>

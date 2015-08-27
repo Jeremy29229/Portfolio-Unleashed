@@ -1,0 +1,46 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMLeaveFeedback
+
+@{
+    ViewBag.Title = "Portfolio Critique";
+}
+
+
+
+@section PageHeader
+{
+    Portfolio Critique
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div class="cardFeedbackHeader">
+            <p>Please enter your constructive critique about
+        @if (Model.Receiver.Substring(Model.Receiver.Length - 1) == "s")
+        {
+            <b>@Model.Receiver'</b>
+        }
+        else
+        {
+            <b>@Model.Receiver's</b>
+        }
+            <b>@Model.ProjectName</b></p>
+        </div>
+    
+        <div class="form-group">
+            @Html.TextAreaFor(x => x.Description, new { @class="form-control" })
+        </div>
+        <div>@Html.HiddenFor(x => x.IsSeen)</div>
+        <div>@Html.HiddenFor(x => x.Sender)</div>
+        <div>@Html.HiddenFor(x => x.TimeStamp)</div>
+        <div>@Html.HiddenFor(x => x.Title)</div>
+        <div>@Html.HiddenFor(x => x.URL)</div>
+        <div>@Html.HiddenFor(x => x.UserId)</div>
+        <div>@Html.HiddenFor(x => x.SenderId)</div>
+        <div class="submitButton">
+            <input class="btn btn-primary" type="submit" value="Send" />
+        </div>
+    }
+</div>

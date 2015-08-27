@@ -1,0 +1,23 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMEducation>
+
+<fieldset class="container accountCreationSection">
+    <legend>Education   <span class="glyphicon glyphicon-book" /></legend>
+    <div id="educationContainer">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (VMEducation e in Model)
+            {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewEducationEntry.cshtml", e);
+            }
+        }
+        else
+        {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewEducationEntry.cshtml", new VMEducation());
+        }
+    </div>
+    <div class="submitButton">
+        <input class="btn btn-primary" type="button" id="btnAddEducation" value="Add Additional Education" />
+    </div>
+</fieldset>

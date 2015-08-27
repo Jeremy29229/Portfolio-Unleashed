@@ -1,0 +1,23 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model List<VMLink>
+
+<fieldset class="container accountCreationSection">
+    <legend>Links   <span class="glyphicon glyphicon-file" /></legend>
+    <div id="linkContainer">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (VMLink l in Model)
+            {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewLinkEntry.cshtml", l);
+            }
+        }
+        else
+        {
+            @Html.Partial("~/Views/User/Partial/FormEntry/_NewLinkEntry.cshtml", new VMLink());
+        }
+    </div>
+    <div class="submitButton">
+        <input class="btn btn-primary" type="button" id="btnAddLink" value="Add Link" />
+    </div>
+</fieldset>

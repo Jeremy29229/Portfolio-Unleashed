@@ -1,0 +1,71 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@{
+    ViewBag.Title = "Admin Index";
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+	Admin tools
+}
+
+<div id="adminToolsArea" class="container">
+
+    <div class="adminOption">
+        <a href="~/Admin/AllUsers">
+            <div class="adminButton">
+                View All Users
+            </div>
+        </a>
+    </div>
+
+    <div class="adminOption">
+        <a href="~/Admin/AllPortfolios">
+            <div class="adminButton">
+                View All Portfolios
+            </div>
+        </a>
+    </div>
+
+    <div class="adminOption">
+        <a href="~/Admin/AllProjects">
+            <div class="adminButton">
+                View All Projects
+            </div>
+        </a>
+    </div>
+
+    <div class="adminOption">
+        <a href="~/Admin/AllNotifications">
+            <div class="adminButton">
+                View All Notifications
+            </div>
+        </a>
+    </div>
+
+    <div class="adminOption">
+        <a href="~/Admin/ModifyRoles">
+            <div class="adminButton">
+                Modify Roles
+            </div>
+        </a>
+    </div>
+
+    <div class="adminOption">
+        <a href="~/Admin/AnnouncementNotification">
+            <div class="adminButton">
+                Send Announcement
+            </div>
+        </a>
+    </div>
+    
+    <div class="adminOption">
+        <a href="~/Admin/SendEmailToUser">
+            <div class="adminButton">
+                Send Email
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@model VMEditAccountSettings
+@{
+    ViewBag.Title = "Edit Account Settings";
+    Layout = "~/Views/_MainLayout2.cshtml";
+}
+
+<h2>EditAccountSettings</h2>
+<div id="EditAccount">
+     @using (Html.BeginForm()) { 
+        @Html.ValidationSummary()
+         
+         
+        <div class="AccountSettings">Change profile visibility:
+        <div> Visible: @Html.RadioButtonFor(x => x.ProfileVisibility, "True")</div>
+        <div> Hidden:@Html.RadioButtonFor(x => x.ProfileVisibility,"False") </div>
+        </div>
+         
+        <div class="AccountSettings">Change receiving emails for admin notifications
+        <div> Enable emails: @Html.RadioButtonFor(x => x.EmailAdminMessage, "True")</div>
+        <div> Disable emails:@Html.RadioButtonFor(x => x.EmailAdminMessage,"False") </div>
+        </div>
+         
+        <div class="AccountSettings">Change receiving emails for collaboration addition notifications
+        <div>Enable emails: @Html.RadioButtonFor(x => x.EmailCollaborationAddition, "True")</div>
+        <div>Disable emails:@Html.RadioButtonFor(x => x.EmailCollaborationAddition,"False") </div>
+        </div>
+         
+        <div class="AccountSettings">Change receiving emails for collaboration removel notifications
+        <div>Enable emails: @Html.RadioButtonFor(x => x.EmailCollaborationRemoval, "True")</div>
+        <div>Disable emails:@Html.RadioButtonFor(x => x.EmailCollaborationRemoval,"False") </div>
+        </div>
+         
+        <div class="AccountSettings">Change receiving emails for collaboration request notifications
+        <div>Enable emails: @Html.RadioButtonFor(x => x.EmailCollaborationRequest, "True")</div>
+        <div>Disable emails:@Html.RadioButtonFor(x => x.EmailCollaborationRequest,"False") </div>
+        </div>
+         
+        <div class="AccountSettings">Change receiving emails for daily view report notifications
+        <div>Enable emails: @Html.RadioButtonFor(x => x.EmailDailyViewReport, "True")</div>
+        <div>Disable emails:@Html.RadioButtonFor(x => x.EmailDailyViewReport,"False") </div>
+        </div>
+         
+         @Html.Hidden("UserId")
+         @Html.Hidden("Id")
+        <input type="submit" value="Save Settings" /> 
+     } 
+</div>

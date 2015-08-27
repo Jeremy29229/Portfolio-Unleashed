@@ -1,0 +1,136 @@
+﻿@using PortfolioUnleashed.Models;
+@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMAllPortfolios
+
+@{
+    ViewBag.Title = "Portfolios";
+    int index = 0;
+}
+
+<link href="~/Style/AdminViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@section PageHeader
+{
+All Portfolios
+}
+
+<div class="container-fluid">
+    @if (Model != null && Model.Portfolios.Count > 0)
+    {
+        <div id="tablePortfolios" class="panel panel-primary">
+            <div class="panel-heading">All Portfolios</div>
+            <div id="tablePortfoliosScroll">
+                <table class="table">
+                    <tr class="tableHeaders">
+                        <th><a class="btn btn-primary" href="@Url.Action("AllPortfolios", "Admin", new { orderBy = "Title", isDescending = !Model.IsDescending })">Title @if (Model.OrderBy == "Title" && !Model.IsDescending)
+                                                                                                                                                                         {<span class="caret"></span>}
+                                                                                                                                                                         else if (Model.OrderBy == "Title" && Model.IsDescending)
+                                                                                                                                                                         {<span class="dropup"><span class="caret"></span></span>}</a></th>
+                        <th><a class="btn btn-primary" href="@Url.Action("AllPortfolios", "Admin", new { orderBy = "UserId", isDescending = !Model.IsDescending })">User Id @if (Model.OrderBy == "UserId" && !Model.IsDescending)
+                                                                                                                                                                            {<span class="caret"></span>}
+                                                                                                                                                                            else if (Model.OrderBy == "UserId" && Model.IsDescending)
+                                                                                                                                                                            {<span class="dropup"><span class="caret"></span></span>}</a></th>
+                        <th><a class="btn btn-primary" href="@Url.Action("AllPortfolios", "Admin", new { orderBy = "Visibility", isDescending = !Model.IsDescending })">Visibility @if (Model.OrderBy == "Visibility" && !Model.IsDescending)
+                                                                                                                                                                                   {<span class="caret"></span>}
+                                                                                                                                                                                   else if (Model.OrderBy == "Visibility" && Model.IsDescending)
+                                                                                                                                                                                   {<span class="dropup"><span class="caret"></span></span>}</a></th>
+                        <th><a class="btn btn-primary" href="@Url.Action("AllPortfolios", "Admin", new { orderBy = "PortfolioId", isDescending = !Model.IsDescending })">Portfolio Id @if (Model.OrderBy == "PortfolioId" && !Model.IsDescending)
+                                                                                                                                                                                      {<span class="caret"></span>}
+                                                                                                                                                                                      else if (Model.OrderBy == "PortfolioId" && Model.IsDescending)
+                                                                                                                                                                                      {<span class="dropup"><span class="caret"></span></span>}</a></th>
+                        <th>Projects</th>
+                        <th>Feature Project</th>
+                        <th>Add to Portfolio</th>
+                        <th>Delete</th>
+                    </tr>
+
+                    @foreach (VMPortfolio u in Model.Portfolios)
+                    {
+                        if (index % 2 == 0)
+                        {
+                        <tr class="evenRowTableDetails">
+                            <td><a href="@Url.Action("Portfolio", "Portfolio", new { id = u.Id })">@u.Title</a></td>
+                            <td>@u.UserId </td>
+                            <td>@u.Visibility </td>
+                            <td>@u.Id </td>
+                            @if (u.Projects != null && u.Projects.Count > 0)
+                            {
+                                <td class="projectList">
+                                    <div class="projectListDiv">
+                                        @foreach (VMProject p in u.Projects.ToList())
+                                        {
+                                            <p><a href="@Url.Action("FullProject", "Project", new { id = p.Id })">@p.Title</a></p>
+                                        }
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <p>No Projects</p>
+                                </td>
+                            }
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="~/Admin/FeaturePortfolio/@u.Id">Feature</a><br />
+                            </td>
+                            <td>
+                                <a class="btn btn-default btn-xs" href="@Url.Action("PortfolioCreateEdit", "Portfolio", new { id = u.Id })"><span class="glyphicon glyphicon-pencil" title="Edit Portfolio"></span></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-xs" href="@Url.Action("AddDummyProject", "Admin", new { ID = u.Id })">Add Dummy Project</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-xs" href="~/Admin/DeletePortfolio/@u.Id" onclick="return confirm('This will delete the Portfolio from the databse entirely.\nThis cannot be undone.\nAre you sure you wish to proceed?')">Delete Portfolio</a><br />
+                            </td>
+                        </tr>
+                        }
+                        else
+                        {
+                        <tr class="oddRowTableDetails">
+                            <td>@u.Title </td>
+                            <td>@u.UserId </td>
+                            <td>@u.Visibility </td>
+                            <td>@u.Id </td>
+                            @if (u.Projects != null && u.Projects.Count > 0)
+                            {
+                                <td class="projectList">
+                                    <div class="projectListDiv">
+                                        @foreach (VMProject p in u.Projects.ToList())
+                                        {
+                                            <p><a href="@Url.Action("FullProject", "Project", new { id = p.Id })">@p.Title</a></p>
+                                        }
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <p>No Projects</p>
+                                </td>
+                            }
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="~/Admin/FeaturePortfolio/@u.Id">Feature</a><br />
+                            </td>
+                            <td>
+                                <a class="btn btn-default btn-xs" href="@Url.Action("PortfolioCreateEdit", "Portfolio", new { id = u.Id })"><span class="glyphicon glyphicon-pencil" title="Edit Portfolio"></span></a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-xs" href="@Url.Action("AddDummyProject", "Admin", new { ID = u.Id })">Add Dummy Project</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-xs" href="~/Admin/DeletePortfolio/@u.Id">Delete Portfolio</a><br />
+                            </td>
+                        </tr>
+                        }
+                        index++;
+                    }
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>There are currently no portfolios in the database, or no users were passed in.</h2>
+    }
+</div>

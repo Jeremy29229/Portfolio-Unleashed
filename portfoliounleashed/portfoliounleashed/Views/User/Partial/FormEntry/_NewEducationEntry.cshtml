@@ -1,0 +1,37 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMEducation
+@{ 
+	Layout = null;
+	int id = Model.Id;
+}
+
+<div class="formSection">
+    <div class="form-group">
+        @Html.HiddenFor(m => m.UserId, new { Name = "Education.UserId" })
+        @Html.Hidden("Education.Id", id)
+        @Html.LabelFor(m => m.School)
+        @Html.TextBoxFor(m => m.School, new { Name = "Education.School", @class = "form-control", placeholder = "ex: Example University" })
+        @Html.ValidationMessageFor(m => m.School)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Degree)
+        @Html.TextBoxFor(m => m.Degree, new { Name = "Education.Degree", @class = "form-control", placeholder = "ex: 'Bachelors of Science' or 'BSCS' " })
+        @Html.ValidationMessageFor(m => m.Degree)
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            @Html.LabelFor(m => m.StartYear)
+            @Html.TextBoxFor(m => m.StartYear, new { Name = "Education.StartYear", @class = "form-control", placeholder = "Start Year" })
+            @Html.ValidationMessageFor(m => m.StartYear)
+        </div>
+
+        <div class="col-xs-6 form-group">
+            @Html.LabelFor(m => m.EndYear)
+            @Html.TextBoxFor(m => m.EndYear, new { Name = "Education.EndYear", @class = "form-control", placeholder = "End Year" })
+            @Html.ValidationMessageFor(m => m.EndYear)
+        </div>
+    </div>
+</div>

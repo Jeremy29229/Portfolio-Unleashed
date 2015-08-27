@@ -1,0 +1,74 @@
+﻿@model PortfolioUnleashed.Models.ViewModels.VMProjectSearch
+
+@{
+    ViewBag.Title = "Project Search";
+}
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.TextBox("searchText", null, new { id = "searchText", type = "text", placeholder = "Project Search Text" });
+    
+    @Html.Label("Search Projects By: ");
+    
+    <select id="searchType" name="searchType">
+            <option value="project_Title">Title</option>
+            <option value="project_CollaboratorsEmail">Collaborators' Email</option>
+            <option value="project_CollaboratorsFullName">Collaborators' Full Name</option>
+            <option value="project_CollaboratorsFirstName">Collaborators' First Name</option>
+            <option value="project_CollaboratorsLastName">Collaborators' Last Name</option>
+    </select>
+    
+    <input type="submit" value="Search" />
+}
+
+<br />
+@if (Model != null && Model.Results != null && Model.Results.Count > 0)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Project Search Results</div>
+        <table class="table">
+            @if (Model.Results.Count == 1)
+            {
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Join Project?</th>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th><a class="btn btn-primary" href="@Url.Action("Projects", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "ProjectTitle", isDescending = !Model.IsDescending})">Title @if(Model.OrderBy=="ProjectTitle" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="ProjectTitle" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn btn-primary" href="@Url.Action("Projects", "Search", new { searchText = Model.SearchText, searchType = Model.SearchType, orderBy = "ProjectDescription", isDescending = !Model.IsDescending})">Description @if(Model.OrderBy=="ProjectDescription" && !Model.IsDescending){<span class="caret"></span>}else if(Model.OrderBy=="ProjectDescription" && Model.IsDescending){<span class="dropup"><span class="caret"></span></span>}</a></th>
+                    <th><a class="btn" href="#">Join Project?</a></th>
+                </tr>
+            }
+
+            @foreach (var p in Model.Results)
+            {
+                <tr>
+                    <td>@p.ProjectTitle</td>
+                    <td>@p.ProjectDescription</td>
+                    @if(p.ProjectCollaborationSetting == 0)
+                    {
+                        <td><a class="btn btn-info" href="@Url.Action("AddSelfAsCollaborator", "Project", routeValues:new { projectId = p.ProjectId, userId =WebSecurity.CurrentUserId })">Join Project</a></td>
+                    }
+                    else if (p.ProjectCollaborationSetting == 2)
+                    {
+                        <td><a class="btn btn-info" href="@Url.Action("RequestAddAsCollaborator", "Project", routeValues: new { projectId = p.ProjectId, userId = WebSecurity.CurrentUserId })">Request To Join Project</a></td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+}
+else if(Model == null)
+{
+
+}
+else
+{
+    <h3>Your search didn't return any results :(</h3>
+}

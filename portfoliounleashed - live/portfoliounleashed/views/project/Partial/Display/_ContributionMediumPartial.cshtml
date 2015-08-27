@@ -1,0 +1,66 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMContributionMedium
+@{
+	Layout = null;
+}
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+@if (Model.MediaType == MediaType.Image || Model.MediaType == MediaType.Download)
+{
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 singleMedia panel panel-default">
+        <div class="imageContainer panel-body">
+            @if (Model.MediaType == MediaType.Image)
+            {
+                <img class="img img-responsive" src="@Model.Link" alt="Image" height="300"/>
+            }
+            else if (Model.MediaType == MediaType.Download)
+            {
+                <a href="@Model.Link" download="testDownload">Download Link</a>
+            }
+        </div>
+        <div class="well-sm panel-footer captionContainer">
+            @Model.Caption
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-xs-12 singleMedia panel panel-default">
+        <div class="imageContainer panel-body">
+            @if (Model.MediaType == MediaType.Video)
+            {
+                <video width="320" height="240" controls>
+                    <source src="@Model.Link" />
+                </video>
+            }
+            else if (Model.MediaType == MediaType.YouTubeVideo)
+            {
+                @*<embed src="@Model.Link" width="320" height="240">*@
+            <iframe width="560" 
+                height="315" 
+                src="@Model.Link" 
+                frameborder="0" 
+                allowfullscreen></iframe>
+            }
+            else if (Model.MediaType == MediaType.Sound)
+            {
+                if (Model.Link.Contains("soundcloud"))
+                {
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" src="@Model.Link"></iframe>
+                }
+                else
+                {
+                    <audio controls>
+                        <source src="@Model.Link" />
+                        <p>Your browser does not support this audio.</p>
+                    </audio>
+                } 
+            }
+        </div>
+        <div class="well-sm panel-footer captionContainer">
+            @Model.Caption
+        </div>
+    </div>
+}

@@ -1,0 +1,38 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model VMContribution
+@{
+    ViewBag.Title = "Contribution Editor";
+}
+
+@section PageHeader
+{
+	@ViewBag.ProjectTitle - Editing Contribution
+}
+
+<div class="container">
+<div class="text-danger bg-danger">
+		@Html.ValidationSummary()
+</div>
+@using (Html.BeginForm("EditContribution", "Project", FormMethod.Post))
+{
+	@Html.HiddenFor(m=>m.ProjectId)
+	@Html.HiddenFor(m=>m.UserId)
+	@Html.Partial("~/Views/Project/Partial/FormEntry/_ContributionFormPartial.cshtml", Model)
+
+	<br/>
+	<input class="btn btn-primary btn-lg center-block" type="submit" value="Submit" />
+}
+</div>
+<script src="~/Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+	//Contribution Media entry creation
+	$(function () {
+		$("#btnAddContributionMedia").click(function (e) {
+			e.preventDefault();
+			$.get("@Url.Action("NewContributionMediumEntry", "Project")", function (data) {
+				$("#contributionMediaContainer").append(data);
+			});
+		});
+	});
+</script>

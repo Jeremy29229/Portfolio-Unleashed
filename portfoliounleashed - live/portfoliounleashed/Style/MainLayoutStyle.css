@@ -1,0 +1,167 @@
+﻿body 
+{
+    font-family: sans-serif;
+    background-color: #64718F;
+}
+
+#mainLayout 
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 925px;
+}
+
+#headerDiv 
+{
+    position: relative;
+    min-height: 50px;
+    background-color: #828DA3;
+}
+
+#headerInfo 
+{
+    display: block;
+    clear: both;
+    position: relative;
+    padding: 5px;
+    overflow: hidden;
+}
+
+#websiteTitle 
+{
+    position:relative;
+    float: left;
+    margin: 2px;
+    text-align: center;
+}
+
+#websiteTitle > h4
+{
+    margin-top: 2px;
+    font-family: Broadway;
+}
+
+#websiteLogo 
+{
+    width: 600px;
+}
+
+#membershipArea 
+{
+    position:relative;
+    float: right;
+    margin: 15px 5px;
+}
+
+#navBarArea 
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    background-color: black;
+}
+
+#navBar 
+{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    height: 35px;
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+#navBar > span > a
+{
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+#navBar > span > a:hover
+{
+    background-color: #64718F;
+    border-radius: 2px;
+}
+
+.navBarOptions 
+{
+    background-color: #E6DBAC;
+    padding: 8px 38px;
+}
+
+#searchBar 
+{
+    text-align: center;
+    padding: 8px 45px;
+}
+
+#footerDiv 
+{
+    background-color: #D5C990;
+}
+
+#footerTransition 
+{
+    position: relative;
+    text-align: center;
+    border-top: 2px solid #D5AF90;
+    background: -webkit-linear-gradient(#D5AF90, #D5C990);
+    background: -moz-linear-gradient(#D5AF90, #D5C990);
+    background: linear-gradient(#D5AF90, #D5C990);
+}
+
+#transTitle
+{
+    position: relative;
+    margin: 10px;
+}
+
+#siteDescription 
+{
+    float: left;
+    margin: 15px 45px;
+    padding-right: 60px;
+    width: 300px;
+    border-right: 2px solid black;
+}
+
+#siteDescription > p
+{
+    font-size: 12px;
+}
+
+#siteInfoLinks 
+{
+    float: left;
+    border-right: 2px solid black;
+    padding-right: 60px;
+    margin: 15px;
+}
+
+#footerMembershipLinks 
+{
+    float: left;
+    margin: 15px 45px;
+}
+
+.footerHeaders 
+{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.clearFix 
+{
+    clear:both;
+}
+
+#viewBodySection 
+{
+    padding: 10px;
+    background-color: #828DA3;
+}

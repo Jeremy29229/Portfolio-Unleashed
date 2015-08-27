@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PortfolioUnleashedModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="PortfolioUnleashedModelStoreContainer">
+          <EntitySet Name="ContactInfo" EntityType="PortfolioUnleashedModel.Store.ContactInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Contribution" EntityType="PortfolioUnleashedModel.Store.Contribution" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ContributionMedium" EntityType="PortfolioUnleashedModel.Store.ContributionMedium" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Education" EntityType="PortfolioUnleashedModel.Store.Education" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FeaturedPortfolio" EntityType="PortfolioUnleashedModel.Store.FeaturedPortfolio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Link" EntityType="PortfolioUnleashedModel.Store.Link" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notification" EntityType="PortfolioUnleashedModel.Store.Notification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Portfolio" EntityType="PortfolioUnleashedModel.Store.Portfolio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Project" EntityType="PortfolioUnleashedModel.Store.Project" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Project_Portfolio" EntityType="PortfolioUnleashedModel.Store.Project_Portfolio" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectMedium" EntityType="PortfolioUnleashedModel.Store.ProjectMedium" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectPermission" EntityType="PortfolioUnleashedModel.Store.ProjectPermission" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QuickReference" EntityType="PortfolioUnleashedModel.Store.QuickReference" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="PortfolioUnleashedModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSetting" EntityType="PortfolioUnleashedModel.Store.UserSetting" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="Contribution_ContributionMedium" Association="PortfolioUnleashedModel.Store.Contribution_ContributionMedium">
+            <End Role="Contribution" EntitySet="Contribution" />
+            <End Role="ContributionMedium" EntitySet="ContributionMedium" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ContactInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Information" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contribution">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="ContributionMedium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="MediumType" Type="int" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="200" />
+          <Property Name="Link" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="School" Type="nvarchar" MaxLength="50" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartYear" Type="smallint" />
+          <Property Name="EndYear" Type="smallint" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeaturedPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayText" Type="nvarchar" MaxLength="200" />
+          <Property Name="URL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="isSeen" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="URL" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="256" />
+          <Property Name="NotificationType" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="SenderId" Type="int" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Visibility" Type="int" Nullable="false" />
+          <Property Name="IsMainPortfolio" Type="bit" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Template" Type="int" Nullable="false" />
+          <Property Name="CollaborationSetting" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project_Portfolio">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="PortfolioId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="PortfolioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectMedium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="MediumType" Type="int" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="200" />
+          <Property Name="Link" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="ProjectPermission">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="IsProjectEditor" Type="bit" Nullable="false" />
+          <Property Name="IsProjectMaster" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuickReference">
+          <Key>
+            <PropertyRef Name="QuickReferenceId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="QuickReferenceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="254" />
+          <Property Name="LastDailyReportSendTime" Type="datetime" />
+          <Property Name="TotalViews" Type="int" Nullable="false" />
+          <Property Name="ViewsSinceLastReport" Type="int" Nullable="false" />
+          <Property Name="UserSettingId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsPublic" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForAdminMessage" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationAddition" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationRemoval" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationRequest" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForViewReport" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForGlobalAccouncement" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForLeaveCard" Type="bit" Nullable="false" />
+          <Property Name="IsEmailedForPortfolioFeedback" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="Contribution_ContributionMedium">
+          <End Role="Contribution" Type="PortfolioUnleashedModel.Store.Contribution" Multiplicity="1" />
+          <End Role="ContributionMedium" Type="PortfolioUnleashedModel.Store.ContributionMedium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contribution">
+              <PropertyRef Name="UserId" />
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ContributionMedium">
+              <PropertyRef Name="UserId" />
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortfolioUnleashedModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PortfolioUnleashedContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ContactInfoes" EntityType="PortfolioUnleashedModel.ContactInfo" />
+          <EntitySet Name="Contributions" EntityType="PortfolioUnleashedModel.Contribution" />
+          <EntitySet Name="ContributionMediums" EntityType="PortfolioUnleashedModel.ContributionMedium" />
+          <EntitySet Name="Educations" EntityType="PortfolioUnleashedModel.Education" />
+          <EntitySet Name="FeaturedPortfolios" EntityType="PortfolioUnleashedModel.FeaturedPortfolio" />
+          <EntitySet Name="Links" EntityType="PortfolioUnleashedModel.Link" />
+          <EntitySet Name="Notifications" EntityType="PortfolioUnleashedModel.Notification" />
+          <EntitySet Name="Portfolios" EntityType="PortfolioUnleashedModel.Portfolio" />
+          <EntitySet Name="Projects" EntityType="PortfolioUnleashedModel.Project" />
+          <EntitySet Name="ProjectMediums" EntityType="PortfolioUnleashedModel.ProjectMedium" />
+          <EntitySet Name="ProjectPermissions" EntityType="PortfolioUnleashedModel.ProjectPermission" />
+          <EntitySet Name="QuickReferences" EntityType="PortfolioUnleashedModel.QuickReference" />
+          <EntitySet Name="Users" EntityType="PortfolioUnleashedModel.User" />
+          <EntitySet Name="UserSettings" EntityType="PortfolioUnleashedModel.UserSetting" />
+          <AssociationSet Name="UserSettingUser" Association="PortfolioUnleashedModel.UserSettingUser">
+            <End Role="UserSetting" EntitySet="UserSettings" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserQuickReference" Association="PortfolioUnleashedModel.UserQuickReference">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuickReference" EntitySet="QuickReferences" />
+          </AssociationSet>
+          <AssociationSet Name="UserLink" Association="PortfolioUnleashedModel.UserLink">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Link" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="UserContribution" Association="PortfolioUnleashedModel.UserContribution">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contribution" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectContribution" Association="PortfolioUnleashedModel.ProjectContribution">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Contribution" EntitySet="Contributions" />
+          </AssociationSet>
+          <AssociationSet Name="ContributionContributionMedium" Association="PortfolioUnleashedModel.ContributionContributionMedium">
+            <End Role="Contribution" EntitySet="Contributions" />
+            <End Role="ContributionMedium" EntitySet="ContributionMediums" />
+          </AssociationSet>
+          <AssociationSet Name="UserPortfolio" Association="PortfolioUnleashedModel.UserPortfolio">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Portfolio" EntitySet="Portfolios" />
+          </AssociationSet>
+          <AssociationSet Name="UserEducation" Association="PortfolioUnleashedModel.UserEducation">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Education" EntitySet="Educations" />
+          </AssociationSet>
+          <AssociationSet Name="UserNotification" Association="PortfolioUnleashedModel.UserNotification">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="UserContactInfo" Association="PortfolioUnleashedModel.UserContactInfo">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ContactInfo" EntitySet="ContactInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="UserProjectPermission" Association="PortfolioUnleashedModel.UserProjectPermission">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ProjectPermission" EntitySet="ProjectPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectProjectPermission" Association="PortfolioUnleashedModel.ProjectProjectPermission">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectPermission" EntitySet="ProjectPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="PortfolioFeaturedPortfolio" Association="PortfolioUnleashedModel.PortfolioFeaturedPortfolio">
+            <End Role="Portfolio" EntitySet="Portfolios" />
+            <End Role="FeaturedPortfolio" EntitySet="FeaturedPortfolios" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectProjectMedium" Association="PortfolioUnleashedModel.ProjectProjectMedium">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectMedium" EntitySet="ProjectMediums" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectPortfolio" Association="PortfolioUnleashedModel.ProjectPortfolio">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Portfolio" EntitySet="Portfolios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ContactInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Information" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserContactInfo" FromRole="ContactInfo" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contribution">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ProjectId" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserContribution" FromRole="Contribution" ToRole="User" />
+          <NavigationProperty Name="Project" Relationship="PortfolioUnleashedModel.ProjectContribution" FromRole="Contribution" ToRole="Project" />
+          <NavigationProperty Name="ContributionMedia" Relationship="PortfolioUnleashedModel.ContributionContributionMedium" FromRole="Contribution" ToRole="ContributionMedium" />
+        </EntityType>
+        <EntityType Name="ContributionMedium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="MediumType" Type="Int32" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contribution" Relationship="PortfolioUnleashedModel.ContributionContributionMedium" FromRole="ContributionMedium" ToRole="Contribution" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="ProjectId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Education">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="School" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Degree" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="StartYear" Type="Int16" />
+          <Property Name="EndYear" Type="Int16" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserEducation" FromRole="Education" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeaturedPortfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Portfolio" Relationship="PortfolioUnleashedModel.PortfolioFeaturedPortfolio" FromRole="FeaturedPortfolio" ToRole="Portfolio" />
+          <Property Type="Int32" Name="PortfolioId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayText" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserLink" FromRole="Link" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="isSeen" Type="Boolean" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Sender" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="NotificationType" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SenderId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserNotification" FromRole="Notification" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Portfolio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Visibility" Type="Int32" Nullable="false" />
+          <Property Name="IsMainPortfolio" Type="Boolean" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserPortfolio" FromRole="Portfolio" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="FeaturedPortfolios" Relationship="PortfolioUnleashedModel.PortfolioFeaturedPortfolio" FromRole="Portfolio" ToRole="FeaturedPortfolio" />
+          <NavigationProperty Name="Projects" Relationship="PortfolioUnleashedModel.ProjectPortfolio" FromRole="Portfolio" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Template" Type="Int32" Nullable="false" />
+          <Property Name="CollaborationSetting" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contributions" Relationship="PortfolioUnleashedModel.ProjectContribution" FromRole="Project" ToRole="Contribution" />
+          <NavigationProperty Name="ProjectPermissions" Relationship="PortfolioUnleashedModel.ProjectProjectPermission" FromRole="Project" ToRole="ProjectPermission" />
+          <NavigationProperty Name="ProjectMedia" Relationship="PortfolioUnleashedModel.ProjectProjectMedium" FromRole="Project" ToRole="ProjectMedium" />
+          <NavigationProperty Name="Portfolios" Relationship="PortfolioUnleashedModel.ProjectPortfolio" FromRole="Project" ToRole="Portfolio" />
+        </EntityType>
+        <EntityType Name="ProjectMedium">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="MediumType" Type="Int32" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Project" Relationship="PortfolioUnleashedModel.ProjectProjectMedium" FromRole="ProjectMedium" ToRole="Project" />
+          <Property Type="Int32" Name="ProjectId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectPermission">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="IsProjectEditor" Type="Boolean" Nullable="false" />
+          <Property Name="IsProjectMaster" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserProjectPermission" FromRole="ProjectPermission" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="PortfolioUnleashedModel.ProjectProjectPermission" FromRole="ProjectPermission" ToRole="Project" />
+          <Property Type="Int32" Name="ProjectId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuickReference">
+          <Key>
+            <PropertyRef Name="QuickReferenceId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="QuickReferenceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="PortfolioUnleashedModel.UserQuickReference" FromRole="QuickReference" ToRole="User" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="254" Unicode="true" FixedLength="false" />
+          <Property Name="LastDailyReportSendTime" Type="DateTime" Precision="3" />
+          <Property Name="TotalViews" Type="Int32" Nullable="false" />
+          <Property Name="ViewsSinceLastReport" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserSetting" Relationship="PortfolioUnleashedModel.UserSettingUser" FromRole="User" ToRole="UserSetting" />
+          <Property Type="Int32" Name="UserSettingId" Nullable="true" />
+          <NavigationProperty Name="QuickReferences" Relationship="PortfolioUnleashedModel.UserQuickReference" FromRole="User" ToRole="QuickReference" />
+          <NavigationProperty Name="Links" Relationship="PortfolioUnleashedModel.UserLink" FromRole="User" ToRole="Link" />
+          <NavigationProperty Name="Contributions" Relationship="PortfolioUnleashedModel.UserContribution" FromRole="User" ToRole="Contribution" />
+          <NavigationProperty Name="Portfolios" Relationship="PortfolioUnleashedModel.UserPortfolio" FromRole="User" ToRole="Portfolio" />
+          <NavigationProperty Name="Educations" Relationship="PortfolioUnleashedModel.UserEducation" FromRole="User" ToRole="Education" />
+          <NavigationProperty Name="Notifications" Relationship="PortfolioUnleashedModel.UserNotification" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="ContactInfoes" Relationship="PortfolioUnleashedModel.UserContactInfo" FromRole="User" ToRole="ContactInfo" />
+          <NavigationProperty Name="ProjectPermissions" Relationship="PortfolioUnleashedModel.UserProjectPermission" FromRole="User" ToRole="ProjectPermission" />
+        </EntityType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsPublic" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForAdminMessage" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationAddition" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationRemoval" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForCollaborationRequest" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForViewReport" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForGlobalAccouncement" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForLeaveCard" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailedForPortfolioFeedback" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="PortfolioUnleashedModel.UserSettingUser" FromRole="UserSetting" ToRole="User" />
+        </EntityType>
+        <Association Name="UserSettingUser">
+          <End Type="PortfolioUnleashedModel.UserSetting" Role="UserSetting" Multiplicity="0..1" />
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserSetting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserSettingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserQuickReference">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.QuickReference" Role="QuickReference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuickReference">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserLink">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Link" Role="Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Link">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserContribution">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Contribution" Role="Contribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contribution">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectContribution">
+          <End Type="PortfolioUnleashedModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Contribution" Role="Contribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contribution">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContributionContributionMedium">
+          <End Type="PortfolioUnleashedModel.Contribution" Role="Contribution" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.ContributionMedium" Role="ContributionMedium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contribution">
+              <PropertyRef Name="UserId" />
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ContributionMedium">
+              <PropertyRef Name="UserId" />
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPortfolio">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Portfolio" Role="Portfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Portfolio">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserEducation">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Education" Role="Education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Education">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserNotification">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserContactInfo">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.ContactInfo" Role="ContactInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContactInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProjectPermission">
+          <End Type="PortfolioUnleashedModel.User" Role="User" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.ProjectPermission" Role="ProjectPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectPermission">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectProjectPermission">
+          <End Type="PortfolioUnleashedModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.ProjectPermission" Role="ProjectPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectPermission">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PortfolioFeaturedPortfolio">
+          <End Type="PortfolioUnleashedModel.Portfolio" Role="Portfolio" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.FeaturedPortfolio" Role="FeaturedPortfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Portfolio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeaturedPortfolio">
+              <PropertyRef Name="PortfolioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectProjectMedium">
+          <End Type="PortfolioUnleashedModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="PortfolioUnleashedModel.ProjectMedium" Role="ProjectMedium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMedium">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProjectPortfolio">
+          <End Type="PortfolioUnleashedModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="PortfolioUnleashedModel.Portfolio" Role="Portfolio" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PortfolioUnleashedModelStoreContainer" CdmEntityContainer="PortfolioUnleashedContext">
+          <EntitySetMapping Name="ContactInfoes">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.ContactInfo">
+              <MappingFragment StoreEntitySet="ContactInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contributions">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Contribution">
+              <MappingFragment StoreEntitySet="Contribution">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContributionMediums">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.ContributionMedium">
+              <MappingFragment StoreEntitySet="ContributionMedium">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MediumType" ColumnName="MediumType" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Educations">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Education">
+              <MappingFragment StoreEntitySet="Education">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+                <ScalarProperty Name="EndYear" ColumnName="EndYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeaturedPortfolios">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.FeaturedPortfolio">
+              <MappingFragment StoreEntitySet="FeaturedPortfolio">
+                <ScalarProperty Name="PortfolioId" ColumnName="PortfolioId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Link">
+              <MappingFragment StoreEntitySet="Link">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="isSeen" ColumnName="isSeen" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Portfolios">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Portfolio">
+              <MappingFragment StoreEntitySet="Portfolio">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Visibility" ColumnName="Visibility" />
+                <ScalarProperty Name="IsMainPortfolio" ColumnName="IsMainPortfolio" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Template" ColumnName="Template" />
+                <ScalarProperty Name="CollaborationSetting" ColumnName="CollaborationSetting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectMediums">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.ProjectMedium">
+              <MappingFragment StoreEntitySet="ProjectMedium">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MediumType" ColumnName="MediumType" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectPermissions">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.ProjectPermission">
+              <MappingFragment StoreEntitySet="ProjectPermission">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsProjectEditor" ColumnName="IsProjectEditor" />
+                <ScalarProperty Name="IsProjectMaster" ColumnName="IsProjectMaster" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuickReferences">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.QuickReference">
+              <MappingFragment StoreEntitySet="QuickReference">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuickReferenceId" ColumnName="QuickReferenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserSettingId" ColumnName="UserSettingId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastDailyReportSendTime" ColumnName="LastDailyReportSendTime" />
+                <ScalarProperty Name="TotalViews" ColumnName="TotalViews" />
+                <ScalarProperty Name="ViewsSinceLastReport" ColumnName="ViewsSinceLastReport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSettings">
+            <EntityTypeMapping TypeName="PortfolioUnleashedModel.UserSetting">
+              <MappingFragment StoreEntitySet="UserSetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+                <ScalarProperty Name="IsEmailedForAdminMessage" ColumnName="IsEmailedForAdminMessage" />
+                <ScalarProperty Name="IsEmailedForCollaborationAddition" ColumnName="IsEmailedForCollaborationAddition" />
+                <ScalarProperty Name="IsEmailedForCollaborationRemoval" ColumnName="IsEmailedForCollaborationRemoval" />
+                <ScalarProperty Name="IsEmailedForCollaborationRequest" ColumnName="IsEmailedForCollaborationRequest" />
+                <ScalarProperty Name="IsEmailedForViewReport" ColumnName="IsEmailedForViewReport" />
+                <ScalarProperty Name="IsEmailedForGlobalAccouncement" ColumnName="IsEmailedForGlobalAccouncement" />
+                <ScalarProperty Name="IsEmailedForLeaveCard" ColumnName="IsEmailedForLeaveCard" />
+                <ScalarProperty Name="IsEmailedForPortfolioFeedback" ColumnName="IsEmailedForPortfolioFeedback" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProjectPortfolio" TypeName="PortfolioUnleashedModel.ProjectPortfolio" StoreEntitySet="Project_Portfolio" >
+            <EndProperty Name="Portfolio">
+              <ScalarProperty Name="Id" ColumnName="PortfolioId" />
+            </EndProperty>
+            <EndProperty Name="Project">
+              <ScalarProperty Name="Id" ColumnName="ProjectId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,22 @@
+﻿@using PortfolioUnleashed.Models.ViewModels;
+@using PortfolioUnleashed.Enums;
+@model PortfolioUnleashed.Models.ViewModels.VMPortfolio
+
+<link href="~/Style/ProjectViewsStyle.css" type="text/css" rel="stylesheet" />
+
+<div id="portfolioPreviewDiv">
+    <p><b>@Model.Title</b> <i>@Html.ActionLink("View Full", "Portfolio", "Portfolio", routeValues: new { Id = Model.Id }, htmlAttributes: null)</i></p>
+    <div id="portfolioDescriptionDiv">
+        <p>@Model.Description</p>
+    </div>
+
+    @if (Model.Projects != null && Model.Projects.Count > 0)
+    {
+        foreach (VMProject p in Model.Projects)
+        {
+            <div class="projectPreviewSection panel panel-primary">
+                @Html.Partial("~/Views/Project/Partial/Display/_ProjectPreview.cshtml", p)
+            </div>
+        }
+    }
+</div>
